@@ -1,2 +1,5 @@
-/vendor
+/bower_components/
+/node_modules/
+/vendor/
+/modules/userdata/data/*
 /nbproject/private
