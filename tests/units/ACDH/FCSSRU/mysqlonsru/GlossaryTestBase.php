@@ -3,14 +3,17 @@
 namespace tests\unit\ACDH\FCSSRU\mysqlonsru;
 
 use Tests\Common\XPathTestCase,
+    Tests\Common\SRUFromMysqlParts,
     ACDH\FCSSRU\SRUWithFCSParameters,
-    ACDH\FCSSRU\IndentDomDocument;
+    ACDH\FCSSRU\IndentDomDocument,
+    ACDH\FCSSRU\mysqlonsru\GlossaryOnSRU;
 
 $runner = true;
 
 require_once __DIR__ . '/../../../../../modules/utils-php/common.php';
 require_once __DIR__ . '/../../../../../vendor/autoload.php';
 require_once __DIR__ . '/../../../../common/XPathTestCase.php';
+require_once __DIR__ . '/../../../../common/SRUFromMysqlParts.php';
 
 abstract class GlossaryTestBase extends XPathTestCase {
 
@@ -34,6 +37,7 @@ abstract class GlossaryTestBase extends XPathTestCase {
     
     protected $context = 'aeb_eng_001__v001';
     protected $params;
+    protected $protectedSRUFromMysql;
     
     protected function setUp() {
         global $vlibPath;
@@ -46,6 +50,8 @@ abstract class GlossaryTestBase extends XPathTestCase {
         $this->params->operation = 'explain';
         $this->params->xcontext = $this->context;
         $this->params->context = array($this->context);
+        
+        $this->protectedSRUFromMysql = new SRUFromMysqlParts($this->params);
         
 //        $this->dbMock = $this->getMock('mysqli',
         $this->dbMock = $this->getMock('NoRealClass',
@@ -60,19 +66,19 @@ abstract class GlossaryTestBase extends XPathTestCase {
         );
     }
             
-    protected function setupDBMockForSqlScan($prefilter, $completeSql = null) {
+    protected function setupDBMockForSqlScan($prefilter, $ndxAndCondition = '', $completeSql = null) {
         if (isset($completeSql)) {
             $this->expectedSqls = array(
                 $completeSql
             );
         } else {
+            $whereClause = $ndxAndCondition !== '' && $ndxAndCondition[0] === '/' ? '' :
+               "WHERE ".$this->protectedSRUFromMysql->_and("ndx.txt LIKE '%' ", $ndxAndCondition);
+            $innerSql = $this->getInnerSql($whereClause, $prefilter);
             $this->expectedSqls = array(
             "SELECT ndx.txt, base.entry, base.sid, COUNT(*) FROM $this->context AS base ".
-            "INNER JOIN ".
-                "(SELECT ndx.id, ndx.txt FROM ".
-                $prefilter .
-                "WHERE ndx.txt LIKE '%%') AS ndx ".
-            "ON base.id = ndx.id  GROUP BY ndx.txt ORDER BY ndx.txt",            
+            $innerSql.
+            "ON base.id = ndx.id WHERE base.id > 700 GROUP BY ndx.txt ORDER BY ndx.txt",            
             );
         }
         $this->dbMock->expects($this->exactly(1))->method('query')
@@ -80,39 +86,113 @@ abstract class GlossaryTestBase extends XPathTestCase {
                 ->willReturn(false);        
     }
     
-    protected $expectedSqls = array();
-    
-    protected function setupDBMockForSqlSearch($prefilter) {
-        $query = $this->params->query;
-        $this->dbMock->expects($this->at(0))->method('escape_string')
-                ->with($this->params->query)
-                ->willReturn($this->params->query);
-        $this->expectedSqls = array(
-            "SELECT entry FROM $this->context WHERE id = 1",
-            "SELECT COUNT(*)  FROM $this->context AS base ".
+    protected function getInnerSql($whereClause, $prefilter) {
+        $result = strpos($prefilter, 'ExtractValue(') === false ?
             "INNER JOIN ".
                 "(SELECT ndx.id, ndx.txt FROM ".
-                $prefilter .
-                "WHERE ndx.txt LIKE '%$query%') AS ndx ".
-            "ON base.id = ndx.id ",
-            "SELECT ndx.txt, base.entry, base.sid, COUNT(*) FROM $this->context AS base ".
-                "INNER JOIN ".
-                "(SELECT ndx.id, ndx.txt FROM ".
-                $prefilter .
-                "WHERE ndx.txt LIKE '%$query%') AS ndx ".
-            "ON base.id = ndx.id  GROUP BY base.sid LIMIT 0, 10"
-        );
-        $this->dbMock->expects($this->at(1))->method('query')
-                ->with($this->expectedSqls[0])
-                ->willReturn(false);
-        $this->dbMock->expects($this->at(2))->method('query')
-                ->with($this->expectedSqls[1])
-                ->willReturn(false);
-        $this->dbMock->expects($this->at(3))->method('query')
-                ->with($this->expectedSqls[2])
-                ->willReturn(false);      
+                $prefilter.$whereClause.
+                "GROUP BY ndx.id) AS ndx " :
+            "INNER JOIN ".$prefilter;
+        return $result;
+    }
+
+
+    protected $expectedSqls = array();
+    
+    protected function setupMockAndGetDBQueryString() {
+        $splitted = $this->protectedSRUFromMysql->findCQLParts();
+        $dbquery = preg_replace('/"([^"]*)"/', '$1', $splitted['searchString'] !== '' ? $splitted['searchString'] : $this->params->query);
+        $this->dbMock->expects($this->at(0))->method('escape_string')
+                ->with($dbquery)
+                ->willReturn($dbquery);
+        return $dbquery;
     }
     
-
+    protected function setupExpectedMockSql($search) {       
+        $this->expectedSqls = $search;
+        for ($i = 0; $i < count($this->expectedSqls); $i++) {
+            $this->dbMock->expects($this->at($i + 1))->method('query')
+                         ->with($this->expectedSqls[$i])
+                         ->willReturn(false);
+        }
+    }
+    
+    protected function setupDBMockForSqlSearch($prefilter, $ndxAndCondition = '', $exact = false) {
+        $dbquery = $this->setupMockAndGetDBQueryString();
+        $qEnc = $this->protectedSRUFromMysql->encodecharrefs($dbquery); 
+        $anyWhere = "(ndx.txt LIKE '%$dbquery%' OR ndx.txt LIKE '%$qEnc%') ";        
+        $exactWhere = "(ndx.txt = '$dbquery' OR ndx.txt = '$qEnc') ";
+        $whereClause = $ndxAndCondition !== '' && $ndxAndCondition[0] === '/' ? '' :
+            "WHERE ". $this->protectedSRUFromMysql->_and($exact ? $exactWhere : $anyWhere, $ndxAndCondition);
+        $innerSql = $this->getInnerSql($whereClause, $prefilter);
+        $search = array(
+            "SELECT entry FROM $this->context WHERE id = 1",
+            "SELECT COUNT(*)  FROM $this->context AS base ".
+            $innerSql.
+            "ON base.id = ndx.id WHERE base.id > 700",
+            "SELECT ndx.txt, base.entry, base.sid, COUNT(*) FROM $this->context AS base ".
+            $innerSql.
+            "ON base.id = ndx.id WHERE base.id > 700 GROUP BY base.sid LIMIT 0, 10"
+        );
+        $this->setupExpectedMockSql($search);
+    }
+    
+    protected function setupDBMockForColumnBasedSqlSearch($column) {
+        $dbquery = $this->setupMockAndGetDBQueryString();
+        $search = array(
+            "SELECT entry FROM $this->context WHERE id = 1",
+            "SELECT $column, entry, ".($column === 'id' ? 'sid' : 'id').", 1 FROM $this->context WHERE $column='$dbquery'"
+            );
+        $this->setupExpectedMockSql($search);        
+    }
+    
+    protected function getAllIndexes($typeOfIndex) {
+        $params = new SRUWithFCSParameters('explain');
+        $context = 'dummy_dummy';
+        $params->context[0] = $context;
+        $glossary = new GlossaryOnSRU($params);
+        $dbMock = $this->getMock('NoRealClass',
+                array('query', 'escape_string'));
+        $dbMock->error = 'Mock: no error.';
+        $dbMock->expects($this->exactly(1))->method('query')
+                ->with("SELECT entry FROM $context WHERE id = 1")
+                ->willReturn(false);       
+        $ref = new \ReflectionProperty('ACDH\FCSSRU\mysqlonsru\GlossaryOnSRU', 'db');
+        $ref->setAccessible(true);
+        $ref->setValue($glossary, $dbMock);
+        $explain = $glossary->explain();
+        $xml = new \DOMDocument();
+        $xml->loadXML($explain->getBody());
+        try {
+            $xml->createAttributeNS('http://explain.z3950.org/dtd/2.0/', 'zr:create-ns');    
+        } catch (\DOMException $exc) {}
+        $xmlSearcher = new \DOMXPath($xml);
+        $indexes = $xmlSearcher->query('//zr:index[@'.$typeOfIndex.'="true"]/zr:map/zr:name[@set="fcs"]/text()');
+        $ret = array(
+            'empty index' => array(''),
+            'index serverChoice' => array('serverChoice'),
+            'index cql.serverChoice' => array('cql.serverChoice'),
+        );
+        foreach ($indexes as $index) {
+            $ret['index '.$index->textContent] = array($index->textContent);
+        }
+        return $ret;
+    }
+        
+    public function searchableIndexesProvider() {
+        return $this->getAllIndexes('search');        
+    }
+        
+    public function scanableIndexesProvider() {
+        return $this->getAllIndexes('scan');        
+    }
+    
+    public function sortableIndexesProvider() {
+        return $this->getAllIndexes('sort');        
+    }
+    
+    public function nativeIndexesProvider() {
+        return $this->getAllIndexes('native');        
+    }
 }
 
