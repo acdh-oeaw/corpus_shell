@@ -3,7 +3,7 @@
 	url = https://github.com/acdh-oeaw/utils-php.git
 [submodule "xsl"]
 	path = xsl
-	url = https://github.com/acdh-oeaw/cs-xsl.git
+	url = https://github.com/simar0at/cs-xsl.git
 [submodule "modules/mysqlonsru"]
 	path = modules/mysqlonsru
 	url = https://github.com/acdh-oeaw/mysqlonsru.git
