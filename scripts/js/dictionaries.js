@@ -8,7 +8,6 @@
 				$("#main > div:nth-child("+index+")").show();
 			});
 			
-			$('#project').load('http://localhost/corpus_shell/modules/fcs-aggregator/switch.php?x-format=html&version=1.2&x-context='+xcontext+'&operation=explain .zr-description');
 		    $("body").on("submit","form",function(event){
 			 	event.preventDefault();
          		var a = $("#query-text-ui").val();
