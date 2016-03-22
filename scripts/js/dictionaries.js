@@ -16,7 +16,7 @@ $('document').ready(function() {
          	var o = $("#operator").val();
     		var f = $("#field").val();
 			field = f;
-         	$("#searchcontainer").load("https://localhost/corpus_shell/modules/fcs-aggregator/switch.php?version=1.2&operation=searchRetrieve&query="+f+o+encodeURIComponent(a)+"&x-context="+xcontext+"&startRecord=1&maximumRecords=10&x-format=htmlpagetable&x-dataview=kwic,title #result-container",function(){
+         	$("#searchcontainer").load(window.location.href+"/corpus_shell/modules/fcs-aggregator/switch.php?version=1.2&operation=searchRetrieve&query="+f+o+encodeURIComponent(a)+"&x-context="+xcontext+"&startRecord=1&maximumRecords=10&x-format=htmlpagetable&x-dataview=kwic,title #result-container",function(){
 				 $("#query-text-ui").val(a);
 				 $("#operator").val(o);
 				 $("#field").val(f);
