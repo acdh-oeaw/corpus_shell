@@ -5,7 +5,7 @@ $('document').ready(function() {
 		$("#main > div:nth-child("+index+")").show();
 		});
 		
-		$("jumbotron").click(function(){
+		$(".jumbotron").click(function(){
 		$("#main > div").hide();
 		$("#front").show();	
 		});
