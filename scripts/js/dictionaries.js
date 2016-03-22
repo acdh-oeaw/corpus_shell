@@ -3,7 +3,7 @@
 		$('document').ready(function() {
 		
 			$(".nav").on("click","li",function() {
-				var index = $(this).index() + 1;
+				var index = $(this).index() + 2;
 				$("#main > div").hide();
 				$("#main > div:nth-child("+index+")").show();
 			});
