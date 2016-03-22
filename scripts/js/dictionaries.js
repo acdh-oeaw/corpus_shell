@@ -12,6 +12,8 @@ $('document').ready(function() {
 		
 		$("body").on("submit","form",function(event){
 			event.preventDefault();
+			$("#submit-query").hide();
+			$("#loader").show();
          	var a = $("#query-text-ui").val();
          	var o = $("#operator").val();
     		var f = $("#field").val();
@@ -20,6 +22,9 @@ $('document').ready(function() {
 				 $("#query-text-ui").val(a);
 				 $("#operator").val(o);
 				 $("#field").val(f);
+				 $("#loader").hide();
+				 $("#submit-query").show();
+				 
 			 });
 		});
 	});
