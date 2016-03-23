@@ -1,0 +1,40 @@
+  .jumbotron {
+    cursor:pointer;
+  }
+  
+  #header > div {
+    clear:none;
+  }
+  
+  #logo {
+    float:left;
+    max-width:200px;
+    }
+    
+  #main > div:first-child {
+    display:block;
+    }
+  
+  #main > div:not(:first-child) {
+    display:none;
+    }
+  
+  .tei-head {
+    display:none;
+    }
+  
+  .navbar {
+    min-height:20px;
+    cursor:pointer;
+    height:28px;
+    }
+  .navbar-nav > li > a {
+    padding-bottom:0px;
+    padding-top:0px;
+    line-height:28px;
+  }
+    
+
+    
+  
+  
