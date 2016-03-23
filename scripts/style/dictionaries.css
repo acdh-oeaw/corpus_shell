@@ -33,8 +33,106 @@
     padding-top:0px;
     line-height:28px;
   }
+  
+  @media screen and (min-device-width: 1200px) {
+  .container {
+    margin-left:2rem;
+    }
+  }
+  
+  #searchcontainer {
+    float:left;
+    display:none;
+		padding:0;
+  }
+  
+  .form-control {
+    font-size:.8em;
+    height:2rem;
+    padding:0;
+  }
     
-
+  #submit-query {
+      height:2rem;
+      padding:0;
+      margin-left:0.5%;
+      width:23%;
+      display:inline;
+  }
+    
+  .internal.prev,.internal.next {
+			position:static;
+	}
+  .internal.prev {
+			float:left;
+		}
+    
+  .internal.next {
+			float:right;
+		}
+    
+  .cmd_prev {
+			left:0;
+			padding:0 .5rem;
+		}
+    
+  .cmd_next {
+    right:0;
+    padding:0 .5rem;
+		}
+    
+    .disabled {
+		visibility:hidden;
+		}
+    
+    .result-body {
+			margin-top:2rem;
+		}
+    
+    .navbar-inverse {
+			border-radius:0;
+			background-image:none;
+		}
+    
+    .row {
+			margin:0!important;
+		}
+    
+    .result-navigation p {
+			padding-left:1rem;
+    }
+    
+    #querysearch br,.note,  .ui-widget-header {
+      display:none;
+    }
+    
+    #loader {
+      width:23%;
+      display:none;
+      float:right;
+      text-align:center;
+      }
+      
+   #query-text-ui {
+     margin-left:0.5%;
+     width:23.5%;
+     display:inline;
+   }
+   
+   #operator {
+     margin-left:0.5%;
+     width:30%;
+     display:inline;
+   }
+   
+   #field {
+     width:22%;
+     display:inline;
+   }
+    
+     
+         
+         
     
   
   
