@@ -75,9 +75,37 @@
         elem.data("qi", settings);
         init(settings);
 
+        var oldContainerContents;
+        var serverSentData;
+
         function init(s) {
+            oldContainerContents = $(elem.html());
+            serverSentData = {};
+            $.each(oldContainerContents, function(index, value) {
+               if (!$(value).is('form')) {return;}
+               var formName = $(value).attr('id');
+               if (formName === undefined) { formName = index }
+               serverSentData[formName] = {};
+               $.each(value, function(index, value) {
+                   var paramName = $(value).attr('name');
+                   if (paramName !== undefined) {
+                       var paramValue = $(value).val();
+                       serverSentData[formName][paramName] = paramValue;
+                   }
+               });
+               if (serverSentData[formName]['indexes'] !== undefined) {
+                   serverSentData[formName]['scanClause'] = serverSentData[formName]['indexes'] +
+                   '=' + serverSentData[formName]['scanTerm']    
+               }
+               if (index === 0) {
+                   serverSentData['0'] = serverSentData[formName];
+               } 
+            });
             //empty the target element - TODO:optional
             elem.html('');
+            $.each(s.params, function(index, unused) {
+                s.params[index] = $.extend(true, {}, serverSentData, s.params[index]);                
+            });
             generateWidgets(s.params, elem);
         }
 
@@ -292,10 +320,16 @@
             $(input).attr("name", key)
             //     console.log(key, param_settings.static_source);
             if (param_settings.static_source) {
+                var parameters;
+                if (param_settings.id !== undefined) {parameters = param_settings[param_settings.id];}
+                else {parameters = param_settings['0'];}
+                parameters['x-format'] = 'json';
                 //var scanURL = settings.fcs_source +  param_settings.index
-                var source_url = param_settings.static_source.replace(/&amp;/g, '&');
+                var source_url = new URI(param_settings.static_source.replace(/&amp;/g, '&'));
+                source_url.search(parameters);
+                var loadFrom = source_url.href();
                 // if static source - try to retrieve the data 
-                $.getJSON(source_url, function (data) {
+                $.getJSON(loadFrom, function (data) {
                     param_settings.source = data.terms
                     $(input).autocomplete(param_settings);
                     //console.log($(input).autocomplete().source);
