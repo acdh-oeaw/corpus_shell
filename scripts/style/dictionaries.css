@@ -1,5 +1,6 @@
   .jumbotron {
     cursor:pointer;
+
   }
   
   #header > div {
@@ -23,21 +24,13 @@
     display:none;
     }
   
-  .navbar {
-    min-height:20px;
-    cursor:pointer;
-    height:28px;
-    }
-  .navbar-nav > li > a {
-    padding-bottom:0px;
-    padding-top:0px;
-    line-height:28px;
-  }
+  
   
   @media screen and (min-device-width: 1200px) {
   .container {
     margin-left:2rem;
     }
+	
   }
   
   #searchcontainer {
@@ -115,7 +108,7 @@
       
    #query-text-ui {
      margin-left:0.5%;
-     width:23.5%;
+     width:43.5%;
      display:inline;
    }
    
@@ -130,7 +123,9 @@
      display:inline;
    }
     
-     
+  .searchresults {width:100%;}
+  
+  .ui-autocomplete {width:100px;}
          
          
     
