@@ -57,9 +57,13 @@ class GlossaryOnSRUTest extends GlossaryTestBase {
      */
     public function it_should_use_the_right_sql_for_scan() {
         $this->params->operation = 'scan';
-        $this->setupDBMockForSqlScan("$this->context"."_ndx AS ndx ");
+        $this->setupDBMockForSqlScan("$this->context"."_ndx AS ndx ", null,
+                new DummyResult(array(
+                    array("COUNT(*)" => 1, 0 => 'TEST', 'lemma' => 'a famous café in Damascus'),
+                    array("COUNT(*)" => 434562, 0 => 'HUBERT', 'lemma' => 'a kind of, something like')
+                )));
         $ret = $this->t->scan();
-        $this->assertInstanceOf('ACDH\FCSSRU\SRUDiagnostics', $ret);
+        $this->assertInstanceOf('ACDH\FCSSRU\Http\Response', $ret);
     }
     
     /**

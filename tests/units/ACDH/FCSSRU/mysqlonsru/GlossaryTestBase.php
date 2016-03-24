@@ -8,6 +8,9 @@ use Tests\Common\XPathTestCase,
 
 $runner = true;
 
+// use contents of tests/config.
+$_SERVER['DOCUMENT_ROOT'] = __DIR__ . '/../../../../config';
+
 require_once __DIR__ . '/../../../../../modules/utils-php/common.php';
 require_once __DIR__ . '/../../../../../vendor/autoload.php';
 require_once __DIR__ . '/../../../../common/XPathTestCase.php';
@@ -60,24 +63,24 @@ abstract class GlossaryTestBase extends XPathTestCase {
         );
     }
             
-    protected function setupDBMockForSqlScan($prefilter, $completeSql = null) {
+    protected function setupDBMockForSqlScan($prefilter, $completeSql = null, $result = false) {
         if (isset($completeSql)) {
             $this->expectedSqls = array(
                 $completeSql
             );
         } else {
             $this->expectedSqls = array(
-            "SELECT ndx.txt, base.entry, base.sid, COUNT(*) FROM $this->context AS base ".
+            "SELECT  ndx.txt, base.entry, base.sid, COUNT(*) FROM $this->context AS base ".
             "INNER JOIN ".
                 "(SELECT ndx.id, ndx.txt FROM ".
                 $prefilter .
-                "WHERE ndx.txt LIKE '%%') AS ndx ".
-            "ON base.id = ndx.id  GROUP BY ndx.txt ORDER BY ndx.txt",            
+                "WHERE ndx.txt LIKE '%' GROUP BY ndx.id) AS ndx ".
+            "ON base.id = ndx.id WHERE base.id > 700 GROUP BY ndx.txt ORDER BY ndx.txt",            
             );
         }
         $this->dbMock->expects($this->exactly(1))->method('query')
                 ->with($this->expectedSqls[0])
-                ->willReturn(false);        
+                ->willReturn($result);        
     }
     
     protected $expectedSqls = array();
@@ -114,5 +117,25 @@ abstract class GlossaryTestBase extends XPathTestCase {
     }
     
 
+}
+
+class DummyResult {
+    
+    private $dummyResults;
+    
+    private $current_row;
+    
+    public $num_rows;
+    
+    public function __construct(array $dummyResults) {
+        $this->dummyResults = $dummyResults;
+        $this->num_rows = count($dummyResults);
+        $this->current_row = 0;
+    }
+    
+    public function fetch_array() {
+        if ($this->current_row === $this->num_rows) {return null;}
+        return $this->dummyResults[$this->current_row++];
+    }
 }
 
