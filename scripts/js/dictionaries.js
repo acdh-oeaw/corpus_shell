@@ -21,7 +21,13 @@
 			});
 		},
 		minLength: 2,
-		delay: 100
+		delay: 100,
+		select: function(event, ui) {
+			if(ui.item){
+				$('#query-text-ui').val(ui.item.value);
+				}
+				$('#searchretrieve').submit();
+		}
 			});
 		
 		$(".nav").on("click","li",function() {
