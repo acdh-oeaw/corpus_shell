@@ -68,11 +68,13 @@
   .cmd_prev {
 			left:0;
 			padding:0 .5rem;
+			display:none;
 		}
     
   .cmd_next {
     right:0;
     padding:0 .5rem;
+	display:none;
 		}
     
     .disabled {
