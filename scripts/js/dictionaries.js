@@ -20,7 +20,7 @@
 				}));
 			});
 		},
-		minLength: 2,
+		minLength: 1,
 		delay: 100,
 		select: function(event, ui) {
 			if(ui.item){
@@ -68,7 +68,7 @@
 				}));
 			});
 		},
-		minLength: 2,
+		minLength: 1,
 		delay: 100,
 		select: function(event, ui) {
 			if(ui.item){
