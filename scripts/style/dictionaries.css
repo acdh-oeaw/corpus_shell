@@ -1,5 +1,6 @@
   .jumbotron {
     cursor:pointer;
+
   }
   
   #header > div {
@@ -23,22 +24,10 @@
     display:none;
     }
   
-  .navbar {
-    min-height:20px;
-    cursor:pointer;
-    height:28px;
-    }
-  .navbar-nav > li > a {
-    padding-bottom:0px;
-    padding-top:0px;
-    line-height:28px;
-  }
+  .nav {cursor:pointer;}
   
-  @media screen and (min-device-width: 1200px) {
-  .container {
-    margin-left:2rem;
-    }
-  }
+  
+ 
   
   #searchcontainer {
     float:left;
@@ -74,11 +63,13 @@
   .cmd_prev {
 			left:0;
 			padding:0 .5rem;
+			display:none;
 		}
     
   .cmd_next {
     right:0;
     padding:0 .5rem;
+	display:none;
 		}
     
     .disabled {
@@ -115,9 +106,21 @@
       
    #query-text-ui {
      margin-left:0.5%;
-     width:23.5%;
+     width:75%;
      display:inline;
    }
+   
+   .ui-widget-content {
+   border:0px;
+   color:#000;
+   }
+	.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
+    background:#6291C6;
+    color:#fff;
+    border-radius:0;
+	border:none;
+	}
+   
    
    #operator {
      margin-left:0.5%;
@@ -130,9 +133,24 @@
      display:inline;
    }
     
-     
+  .searchresults {width:100%;}
+  
+  .ui-autocomplete {width:100px;}
          
-         
+  @media screen and (min-device-width: 1200px) {
+  .container {
+    margin-left:2rem;
+    }
+	
+  }
+  
+  @media screen and (-webkit-min-device-pixel-ratio: 3.0) and (max-width: 1080px),
+		screen and (max-width: 480px) {
+		.container {margin-left:0;}
+		#searchcontainer {width:100%;}
+		}
+  
+          
     
   
   
