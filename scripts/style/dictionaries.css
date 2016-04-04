@@ -1,0 +1,166 @@
+  .jumbotron {
+    cursor:pointer;
+
+  }
+  
+  #header > div {
+    clear:none;
+  }
+  
+  #logo {
+    float:left;
+    max-width:200px;
+    }
+    
+  #main > div:first-child {
+    display:block;
+    }
+  
+  #main > div:not(:first-child) {
+    display:none;
+    }
+  
+  .tei-head {
+    display:none;
+    }
+  
+  .nav {cursor:pointer;}
+  
+  
+ 
+  
+  #searchcontainer {
+    float:left;
+    display:none;
+		padding:0;
+  }
+  
+  .form-control {
+    font-size:.8em;
+    height:2rem;
+    padding:0;
+  }
+    
+  #submit-query {
+      height:2rem;
+      padding:0;
+      margin-left:0.5%;
+      width:23%;
+      display:inline;
+  }
+    
+  .internal.prev,.internal.next {
+			position:static;
+	}
+  .internal.prev {
+			float:left;
+		}
+    
+  .internal.next {
+			float:right;
+		}
+    
+  .cmd_prev {
+			left:0;
+			padding:0 .5rem;
+			display:none;
+		}
+    
+  .cmd_next {
+    right:0;
+    padding:0 .5rem;
+	display:none;
+		}
+    
+    .disabled {
+		visibility:hidden;
+		}
+    
+    .result-body {
+			margin-top:2rem;
+		}
+    
+    .navbar-inverse {
+			border-radius:0;
+			background-image:none;
+		}
+    
+    .row {
+			margin:0!important;
+		}
+    
+    .result-navigation p {
+			padding-left:1rem;
+    }
+    
+    #querysearch br,.note,  .ui-widget-header {
+      display:none;
+    }
+    
+    #loader {
+      width:23%;
+      display:none;
+      float:right;
+      text-align:center;
+      }
+      
+   #query-text-ui {
+     margin-left:0.5%;
+     width:75%;
+     display:inline;
+   }
+   
+   .ui-widget-content {
+   border:0px;
+  
+   }
+   
+  .ui-widget-content a {color:unset;}
+  
+.ui-autocomplete-loading { background: #ffffff url('https://minerva.arz.oeaw.ac.at/static/images/dicts/ajax-loader.gif') no-repeat right center; }  
+   
+	.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
+    background:#6291C6;
+    color:#fff;
+    border-radius:0;
+	border:none;
+	}
+   
+   
+   #operator {
+     margin-left:0.5%;
+     width:30%;
+     display:inline;
+   }
+   
+   #field {
+     width:22%;
+     display:inline;
+   }
+    
+  .searchresults {width:100%;}
+  
+  .ui-autocomplete {width:100px;}
+  
+
+  
+         
+  @media screen and (min-device-width: 1200px) {
+  .container {
+    margin-left:2rem;
+    }
+	
+  }
+  
+  
+  
+  @media screen and (-webkit-min-device-pixel-ratio: 3.0) and (max-width: 1080px),
+		screen and (max-width: 480px) {
+		.container {margin-left:0;}
+		#searchcontainer {width:100%;}
+		}
+  
+          
+    
+  
+  
