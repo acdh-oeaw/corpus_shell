@@ -112,8 +112,13 @@
    
    .ui-widget-content {
    border:0px;
-   color:#000;
+  
    }
+   
+  .ui-widget-content a {color:unset;}
+  
+.ui-autocomplete-loading { background: #ffffff url('https://minerva.arz.oeaw.ac.at/static/images/dicts/ajax-loader.gif') no-repeat right center; }  
+   
 	.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
     background:#6291C6;
     color:#fff;
@@ -136,6 +141,9 @@
   .searchresults {width:100%;}
   
   .ui-autocomplete {width:100px;}
+  
+
+  
          
   @media screen and (min-device-width: 1200px) {
   .container {
@@ -143,6 +151,8 @@
     }
 	
   }
+  
+  
   
   @media screen and (-webkit-min-device-pixel-ratio: 3.0) and (max-width: 1080px),
 		screen and (max-width: 480px) {

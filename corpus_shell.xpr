@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="17.1">
+<project version="14.2">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="17.1" xml:space="preserve">
-                <serializableOrderedMap>
+            <serialized version="14.2" xml:space="preserve">
+                <map>
                     <entry>
                         <String>enable.project.master.files.support</String>
                         <Boolean>true</Boolean>
@@ -12,156 +12,6 @@
                     <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>https://damasz.hephaistos.arz.oeaw.ac.at/corpus_shell//modules/fcs-aggregator/switch.php?version=1.2&amp;operation=scan&amp;scanClause=sense-en&amp;x-context=apc_eng_002&amp;x-format=xml&amp;x-dataview=kwic,title&amp;sort=x&amp;maximumTerms=10&amp;responsePosition=0</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>scan v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xsl/fcs/scan2view_v1.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>scan-to-html v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>http://localhost/corpus_shell/modules/fcs-aggregator/switch.php?version=1.2&amp;x-context=apc_eng_002&amp;operation=explain&amp;x-realhostname=https://minerva.arz.oeaw.ac.at/vicav2</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>explain v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xsl/profile.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>profile-to-html</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xsl/fcs/explain2view_v1.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>explain-to-html v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xsl/fcs/scan2json.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>scan-to-json v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>http://127.0.0.1/corpus_shell//modules/fcs-aggregator/switch.php?version=1.2&amp;operation=explain&amp;x-context=apc_eng_002</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>explain v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>http://localhost/corpus_shell//modules/fcs-aggregator/switch.php?version=1.2&amp;operation=explain&amp;x-format=xmlXDEBUG_SESSION_START=netbeans-xdebug</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>explain v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>http://localhost/corpus_shell/modules/mysqlonsru/GlossaryOnSRU.php?x-context=apc_eng_002&amp;operation=scan&amp;version=1.2&amp;maximumTerms=100&amp;scanClause=sense=%22to%20ad%22</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>scan-to-json v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>explain-import-test.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>selftransform</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>xsl/tests/input/texts-tunis/tunis.xml</String>
@@ -254,6 +104,21 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
+                                    <String>xsl/profile.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>profile-to-html</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
                                     <String>xsl/tests/input/csv-table-export/msa-course-3.xml</String>
                                 </field>
                                 <field name="scenarioIds">
@@ -264,6 +129,36 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/fcs/scan2view_v1.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>scan-to-html v1</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/fcs/explain2view_v1.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>explain-to-html v1</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
                                     </list>
                                 </field>
                             </scenarioAssociation>
@@ -684,6 +579,21 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/fcs/scan2json.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>scan-to-json v1</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
                                     </list>
                                 </field>
                             </scenarioAssociation>
@@ -1322,9 +1232,6 @@
                                 <field name="workingDir">
                                     <String>${cfd}</String>
                                 </field>
-                                <field name="showConsoleAlways">
-                                    <Boolean>true</Boolean>
-                                </field>
                                 <field name="advancedOptionsMap">
                                     <null/>
                                 </field>
@@ -1368,9 +1275,6 @@
                                     <Boolean>true</Boolean>
                                 </field>
                                 <field name="outputFile">
-                                    <null/>
-                                </field>
-                                <field name="outputResource">
                                     <null/>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
@@ -1455,9 +1359,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>M:/git/corpus_shell/tests/output-actual/fcs/explain.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>M:\git\corpus_shell\tests\output-actual\fcs\explain.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -1585,9 +1486,6 @@
                                 <field name="outputFile">
                                     <null/>
                                 </field>
-                                <field name="outputResource">
-                                    <null/>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -1670,9 +1568,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>M:/git/corpus_shell/tests/output-actual/fcs/glossary-explain.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>M:\git\corpus_shell\tests\output-actual\fcs\glossary-explain.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -1800,9 +1695,6 @@
                                 <field name="outputFile">
                                     <File>M:/git/corpus_shell/tests/output-actual/fcs/profile.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>M:\git\corpus_shell\tests\output-actual\fcs\profile.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -1929,9 +1821,6 @@
                                 <field name="outputFile">
                                     <null/>
                                 </field>
-                                <field name="outputResource">
-                                    <null/>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -2035,10 +1924,10 @@
                                     <String></String>
                                 </field>
                                 <field name="inputXSLURL">
-                                    <String>${pdu}/xsl/fcs/scan2json.xsl</String>
+                                    <String>${currentFileURL}</String>
                                 </field>
                                 <field name="inputXMLURL">
-                                    <String>${currentFileURL}</String>
+                                    <String>file:/M:/git/corpus_shell/tests/input/fcs/scan2view_v2.xml</String>
                                 </field>
                                 <field name="defaultScenario">
                                     <Boolean>false</Boolean>
@@ -2058,9 +1947,6 @@
                                 <field name="outputFile">
                                     <File>M:/git/corpus_shell/tests/output-actual/fcs/scan2view_v1.json</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>M:\git\corpus_shell\tests\output-actual\fcs\scan2view_v1.json</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -2074,7 +1960,7 @@
                                     <Boolean>false</Boolean>
                                 </field>
                                 <field name="showInXMLPane">
-                                    <Boolean>false</Boolean>
+                                    <Boolean>true</Boolean>
                                 </field>
                                 <field name="showInSVGPane">
                                     <Boolean>false</Boolean>
@@ -2187,9 +2073,6 @@
                                 <field name="outputFile">
                                     <null/>
                                 </field>
-                                <field name="outputResource">
-                                    <null/>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -2275,92 +2158,6 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>selftransform</String>
-                                </field>
-                                <field name="baseURL">
-                                    <String></String>
-                                </field>
-                                <field name="footerURL">
-                                    <String></String>
-                                </field>
-                                <field name="fOPMethod">
-                                    <String>pdf</String>
-                                </field>
-                                <field name="fOProcessorName">
-                                    <String>Apache FOP</String>
-                                </field>
-                                <field name="headerURL">
-                                    <String></String>
-                                </field>
-                                <field name="inputXSLURL">
-                                    <String>${currentFileURL}</String>
-                                </field>
-                                <field name="inputXMLURL">
-                                    <String>${currentFileURL}</String>
-                                </field>
-                                <field name="defaultScenario">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="isFOPPerforming">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="saveAs">
-                                    <Boolean>true</Boolean>
-                                </field>
-                                <field name="openInBrowser">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="outputFile">
-                                    <null/>
-                                </field>
-                                <field name="outputResource">
-                                    <null/>
-                                </field>
-                                <field name="openOtherLocationInBrowser">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="locationToOpenInBrowserURL">
-                                    <null/>
-                                </field>
-                                <field name="openInEditor">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInHTMLPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInXMLPane">
-                                    <Boolean>true</Boolean>
-                                </field>
-                                <field name="showInSVGPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInResultSetPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="useXSLTInput">
-                                    <Boolean>true</Boolean>
-                                </field>
-                                <field name="xsltParams">
-                                    <list/>
-                                </field>
-                                <field name="cascadingStylesheets">
-                                    <String-array/>
-                                </field>
-                                <field name="xslTransformer">
-                                    <String>Xsltproc</String>
-                                </field>
-                                <field name="extensionURLs">
-                                    <String-array/>
-                                </field>
-                            </scenario>
-                            <scenario>
-                                <field name="advancedOptionsMap">
-                                    <null/>
-                                </field>
-                                <field name="name">
                                     <String>Abacus search</String>
                                 </field>
                                 <field name="baseURL">
@@ -2401,9 +2198,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/custom-xsl/abacus/result2view_custom.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\custom-xsl\abacus\result2view_custom.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -2594,9 +2388,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/diagnostics.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\diagnostics.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -2680,9 +2471,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/diagnostics_from_scan.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\diagnostics_from_scan.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -2765,9 +2553,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/diagnostics_from_xml.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\diagnostics_from_xml.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -2874,9 +2659,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-expected/fcs/vicav_glossary_explain.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-expected\fcs\vicav_glossary_explain.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -2918,28 +2700,7 @@
                                                 </paramDescriptor>
                                             </field>
                                             <field name="value">
-                                                <String>http://127.0.0.1/corpus_shell//modules/fcs-aggregator/switch.php</String>
-                                            </field>
-                                            <field name="hasXPathValue">
-                                                <Boolean>false</Boolean>
-                                            </field>
-                                        </transformationParameter>
-                                        <transformationParameter>
-                                            <field name="paramDescription">
-                                                <paramDescriptor>
-                                                    <field name="localName">
-                                                        <String>base_url_public</String>
-                                                    </field>
-                                                    <field name="prefix">
-                                                        <null/>
-                                                    </field>
-                                                    <field name="namespace">
-                                                        <null/>
-                                                    </field>
-                                                </paramDescriptor>
-                                            </field>
-                                            <field name="value">
-                                                <String>//localhost/corpus_shell//modules/fcs-aggregator/switch.php</String>
+                                                <String>http://localhost/corpus_shell//modules/fcs-aggregator/switch.php</String>
                                             </field>
                                             <field name="hasXPathValue">
                                                 <Boolean>false</Boolean>
@@ -3086,9 +2847,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -3279,9 +3037,6 @@
                                 <field name="outputFile">
                                     <null/>
                                 </field>
-                                <field name="outputResource">
-                                    <null/>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -3386,9 +3141,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -3579,9 +3331,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -3771,9 +3520,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -3900,9 +3646,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -3985,9 +3728,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/fcs/scan2view_v1/${cfn}.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\fcs\scan2view_v1\${cfn}.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -4178,9 +3918,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -4370,9 +4107,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/scan2view_v1.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\scan2view_v1.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -4499,9 +4233,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/scan2view_v1.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\scan2view_v1.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -4584,9 +4315,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/texts-tunis/${cfn}.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\texts-tunis\${cfn}.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -4861,9 +4589,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/texts-tunis-explain/${cfn}.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\texts-tunis-explain\${cfn}.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -5115,9 +4840,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_glossary_explain.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_glossary_explain.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -5371,9 +5093,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -5584,9 +5303,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -5775,9 +5491,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/bibliography/${cfn}.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\bibliography\${cfn}.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -6010,9 +5723,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/glossary/${cfn}.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\glossary\${cfn}.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -6222,9 +5932,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/csv-table-export/${cfn}.csv</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\csv-table-export\${cfn}.csv</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -6456,9 +6163,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/fcs/${cfn}.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\fcs\${cfn}.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -6712,9 +6416,6 @@
                                 <field name="outputFile">
                                     <null/>
                                 </field>
-                                <field name="outputResource">
-                                    <null/>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -6797,9 +6498,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/fcs/${cfn}.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\fcs\${cfn}.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -7053,9 +6751,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_sample_text.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_sample_text.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -7160,9 +6855,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_language_profile.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_language_profile.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -7437,9 +7129,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_language_profile.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_language_profile.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -7608,9 +7297,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/tests/output-actual/fcs/vicav_ling_feature.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\tests\output-actual\fcs\vicav_ling_feature.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -7736,9 +7422,6 @@
                                 </field>
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/fcs/${cfn}.html</File>
-                                </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\fcs\${cfn}.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -7971,9 +7654,6 @@
                                 <field name="outputFile">
                                     <File>${pd}/xsl/tests/output-actual/glossary/${cfn}.html</File>
                                 </field>
-                                <field name="outputResource">
-                                    <String>${pd}\xsl\tests\output-actual\glossary\${cfn}.html</String>
-                                </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
                                 </field>
@@ -8144,7 +7824,7 @@
                         <String>validation.scenarios</String>
                         <validationScenario-array/>
                     </entry>
-                </serializableOrderedMap>
+                </map>
             </serialized>
         </options>
     </meta>
