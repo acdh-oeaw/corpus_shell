@@ -27,7 +27,7 @@ var switchURL = "http://localhost/corpus_shell/modules/fcs-aggregator/switch.php
  * about that. Note that this is assumed to end with a slash (/)
  * @type {url|path}
  */
-var templateLocation = "scripts/js/";
+var templateLocation = "/corpus_shell/scripts/js/";
 
 /**
  * Default width of a new panel.
