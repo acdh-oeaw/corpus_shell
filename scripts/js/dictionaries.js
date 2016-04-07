@@ -74,7 +74,7 @@ String.prototype.replaceAll = function (search, replacement) {
         });
         // when used like this collects all the promises and then delevers all of
         // them to the done function
-        $.when.apply($, requestsForAllIndexes).done(function () {
+        $.when.apply($, requestsForAllIndexes).then(function () {
             var results = [];
             $.each(arguments, function (index, responseData) {
                 for (var i = 0; i < responseData[2].responseJSON.terms.length; i++) {
@@ -82,6 +82,9 @@ String.prototype.replaceAll = function (search, replacement) {
                 }
             });
             gotFilteredSuggestions(results, callWhenDone);
+        }, function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+            callWhenDone();
         });
     }
 
