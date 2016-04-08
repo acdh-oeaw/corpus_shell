@@ -4,7 +4,7 @@ String.prototype.replaceAll = function (search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
-!function ($, VirtualKeyboard, params, xcontext, navigator) {
+!function ($, VirtualKeyboard, params, xcontext, navigator, URI) {
     var m = {};
     m.ready = false;
     m.userLangs = navigator.languages;
@@ -51,6 +51,7 @@ String.prototype.replaceAll = function (search, replacement) {
         });
 
         $("body").on("submit", "form", onSubmitForm);
+        $("#front .search-caller").on("click", onSearchCall);
     });
 
     function getFilteredSuggestions(unused, callWhenDone) {
@@ -172,4 +173,17 @@ String.prototype.replaceAll = function (search, replacement) {
         VirtualKeyboard.attachKeyboards();
         m.href = '';
     }
-}(jQuery, VirtualKeyboard, params, xcontext, navigator)
+    
+    function onSearchCall(event) {
+        event.preventDefault();
+        var searchConfig = (new URI(event.currentTarget.href)).query(true);
+        if (searchConfig.query === 'metaText==Dictionaries') {
+            // TODO switch someqhere
+            return;
+        }
+        $('#query-text-ui').val(searchConfig.query.replace('serverChoice=', ''));
+        $('#li-search a').click();
+        $('form#searchretrieve').submit();
+        console.log(searchConfig);
+    }
+}(jQuery, VirtualKeyboard, params, xcontext, navigator, URI)
