@@ -177,8 +177,8 @@ String.prototype.replaceAll = function (search, replacement) {
     function onSearchCall(event) {
         event.preventDefault();
         var searchConfig = (new URI(event.currentTarget.href)).query(true);
-        if (searchConfig.query === 'metaText==Dictionaries') {
-            // TODO switch someqhere
+        if (searchConfig.query === 'metaText==Dictionaries') {            
+            $('#li-about a').click();
             return;
         }
         $('#query-text-ui').val(searchConfig.query.replace('serverChoice=', ''));
