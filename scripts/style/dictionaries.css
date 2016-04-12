@@ -111,16 +111,18 @@
    }
    
    .ui-widget-content {
-   border:0px;
+	border:0px;
   
    }
    
-  .ui-widget-content a {color:unset;}
-  
-.ui-autocomplete-loading { background: #ffffff url('https://minerva.arz.oeaw.ac.at/static/images/dicts/ajax-loader.gif') no-repeat right center; }  
+  .ui-widget-content a {
+	color:unset;
+	}
+	
+	.ui-autocomplete-loading { background: #ffffff url('https://minerva.arz.oeaw.ac.at/static/images/dicts/ajax-loader.gif') no-repeat right center; }  
    
 	.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
-    background:#6291C6;
+	background:#6291C6;
     color:#fff;
     border-radius:0;
 	border:none;
@@ -149,16 +151,21 @@
   .container {
     margin-left:2rem;
     }
+	.navbar-nav > li > a {
+	padding-top:5px;
+	padding-bottom:5px;
 	
+	}
+	.navbar-brand {height:20px;}
   }
   
-  
-  
+
   @media screen and (-webkit-min-device-pixel-ratio: 3.0) and (max-width: 1080px),
 		screen and (max-width: 480px) {
 		.container {margin-left:0;}
 		#searchcontainer {width:100%;}
 		}
+				
   
   .counter {display:none;}
           
