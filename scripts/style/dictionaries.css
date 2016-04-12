@@ -151,11 +151,15 @@
   .container {
     margin-left:2rem;
     }
+	
+	.navbar {min-height:auto;}
+	
 	.navbar-nav > li > a {
 	padding-top:5px;
 	padding-bottom:5px;
 	
 	}
+	
 	.navbar-brand {height:20px;}
   }
   
