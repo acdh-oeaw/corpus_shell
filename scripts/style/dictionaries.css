@@ -149,6 +149,9 @@
   .container {
     margin-left:2rem;
     }
+  
+  .navbar {min-height:20px;}
+	
   .navbar-brand {
 	height:auto;
 	} 
@@ -157,7 +160,7 @@
 			padding-top:5px;
 			padding-bottom:5px;
   }
-	
+ 
 	
   }
   
