@@ -13,9 +13,10 @@ String.prototype.replaceAll = function (search, replacement) {
     m.indexes = {};
     m.indexNames = [];
     m.href = new String;
+	m.specialChars = [];
 
     /* get the relevant indexes for the dictionary and store them in an array */
-    m.getIndexes = $.getJSON(params.switchURL + "?version=1.2&operation=explain&x-context=" +
+    m.getIndexes = $.getJSON(params.switchURL+"?version=1.2&operation=explain&x-context=" +
             xcontext + "&x-format=json");
 
     function gotIndexesDone(data) {
@@ -31,6 +32,19 @@ String.prototype.replaceAll = function (search, replacement) {
     }
 
     m.getIndexes.done(gotIndexesDone);
+	
+	m.getSpecialChars = $.get(params.switchURL+'?version=1.2&operation=searchRetrieve&x-context='+xcontext+'&query=rfpid=1');
+    
+	function gotSpecialCharsDone(data)  {
+		$(data).find('value').each(function(){
+			m.specialChars.push($(this).text());
+		});
+        VirtualKeyboard.keys[xcontext] =  m.specialChars;
+        VirtualKeyboard.attachKeyboards();
+	}
+
+	m.getSpecialChars.done(gotSpecialCharsDone);
+	
 
     $('document').ready(function () {
         resultContainerLoaded();
@@ -169,7 +183,7 @@ String.prototype.replaceAll = function (search, replacement) {
 
             return listItem;
         };
-
+        
         VirtualKeyboard.attachKeyboards();
         m.href = '';
     }
