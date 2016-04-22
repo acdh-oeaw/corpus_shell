@@ -4,6 +4,7 @@
         <title>Virtual Keyboard Mockup</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 		<style type="text/css">
 			html {
 				width: 100%;
@@ -46,6 +47,14 @@
                         #exampleSpaceAbove {
                             width: 40%;
                             height: 2em;
+                        }
+						#exampleKeyboardIcon {
+                            /* Note that the keyboard has so many key that it
+                               will extend way beyond the screnn, scrollbars will
+                               be shown.*/
+                            background-color: lightsteelblue;
+                            width: 40%;
+                            height: 20%;
                         }
 		</style>
         <link rel="stylesheet" type="text/css" href="virtual-keyboard.css"/>
@@ -121,6 +130,42 @@
         <span class="virtual-keyboard-input-combo">
         <input name="query" type="text" size="18" class="virtual-keyboard-input" id="sth-unique"/>
         <input type="checkbox" value="unused" class="virtual-keyboard-toggle" id="someid3"/><label for="someid3">öüä</label>
+        <ul role="menu" class="virtual-keyboard">
+            <li role="menuitem"
+                >ö</li><li role="menuitem"
+                       >ü</li><li role="menuitem"
+                       >ä</li><li role="menuitem"
+                       >ß</li><li role="menuitem"
+                       >Ö</li><li role="menuitem"
+                       >Ü</li><li role="menuitem"
+                       >Ä</li><li role="menuitem"
+                       >§</li><li role="menuitem"
+                       >ö</li><li role="menuitem"
+                       >ü</li><li role="menuitem"
+                       >ä</li><li role="menuitem"
+                       >ß</li><li role="menuitem"
+                       >Ö</li><li role="menuitem"
+                       >Ü</li><li role="menuitem"
+                       >Ä</li><li role="menuitem"
+                       >§</li><li role="menuitem"
+                       >ö</li><li role="menuitem"
+                       >ü</li><li role="menuitem"
+                       >ä</li><li role="menuitem"
+                       >ß</li><li role="menuitem"
+                       >Ö</li><li role="menuitem"
+                       >Ü</li><li role="menuitem"
+                       >Ä</li><li role="menuitem"
+                       >§</li>
+        </ul>
+        </span>
+    </form>
+	<div id="exampleSpaceAbove"></div>
+	
+    <form id="exampleKeyboardIcon" class="virtual-keyboard-with-icon">
+        <span class="virtual-keyboard-input-combo">
+        <input name="query" type="text" size="18" class="virtual-keyboard-input" id="sth-unique"/>
+        <input type="checkbox" value="unused" class="virtual-keyboard-toggle" id="someid4"/><label for="someid4"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
+</label>
         <ul role="menu" class="virtual-keyboard">
             <li role="menuitem"
                 >ö</li><li role="menuitem"
