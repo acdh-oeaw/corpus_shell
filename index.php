@@ -25,7 +25,7 @@ switch ($_SERVER['SERVER_NAME']) {
 // x-format=htmlpagetable&operation=searchRetrieve&version=1.2&
 // x-dataview=kwic,title&maximumRecords=10&x-context=pes_eng_032&
 // query=senses==Persian
-$sru_fcs_params->xcontext = 'pes_eng_032';
+$sru_fcs_params->xcontext = 'pes_eng_033';
 $sru_fcs_params->maximumRecords = '50';
 $sru_fcs_params->query = 'lemma==fārsi';
 break;
@@ -35,17 +35,19 @@ $sru_fcs_params->xcontext = 'zul_eng_016';
 $sru_fcs_params->query = 'lemma=zulu';
 break;
     case 'damasz.hephaistos.arz.oeaw.ac.at':
+	case 'damasz.acdh.oeaw.ac.at':
 $sru_fcs_params->maximumRecords = '50';
 $sru_fcs_params->xcontext = 'apc_eng_002';
-$sru_fcs_params->query = 'sense=Damascene';
+$sru_fcs_params->query = 'sense-en=Damascene';
 break;
 
    case 'localhost':
 $sru_fcs_params->xcontext = 'apc_eng_002';
-$sru_fcs_params->query = 'sense=Damascene';
+$sru_fcs_params->query = 'sense-en=Damascene';
 break;
 
 }
 $sru_fcs_params->context = array($sru_fcs_params->xcontext);
 $s = new FCSSwitch();
 $s->run();
+
