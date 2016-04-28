@@ -146,7 +146,7 @@ String.prototype.replaceAll = function (search, replacement) {
         if (m.href === '') {
             m.href = params.switchURL + "?version=1.2&operation=searchRetrieve&query=" +
                     encodeURIComponent(searchTerm) + "&x-context=" + xcontext +
-                    "&startRecord=1&maximumRecords=50&x-format=htmlpagetable";
+                    "&x-userlangs=" + m.userLangs.join() + "&startRecord=1&maximumRecords=50&x-format=htmlpagetable";
         }
 
         var encodedHref = m.href.replaceAll('"', '%22').replaceAll(' ', '%20');
