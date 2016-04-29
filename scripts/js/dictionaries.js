@@ -23,11 +23,9 @@ String.prototype.replaceAll = function (search, replacement) {
         m.indexes = data.indexes;
         $.each(m.indexes, function (unused, value) {
             $("style").append('.ui-widget-content li.ui-menu-item a.ui-corner-all.' + value.name + '{ color: #F00; }');
-            if (value.name === "lemma" || value.name === "inflected" || value.name.substring(0, 6) === "sense-") {
-                m.indexNames.push(value.name);
-                m.indexesString = +value.name + ",";
+            if (value.name === "autocomp") {
+                m.ready = true;
             }
-            m.ready = true;
         });
     }
 
@@ -70,32 +68,20 @@ String.prototype.replaceAll = function (search, replacement) {
 
     function getFilteredSuggestions(unused, callWhenDone) {
         if (!m.ready) {
+        	callWhenDone();
             return;
         }
-        // so now we have to do several requests and then present the result
-        // when all of them are done.
-        // Solution is similiar to this: 
-        // http://stackoverflow.com/a/9865124
-        // and this
-        // http://stackoverflow.com/a/16287125
-        var requestsForAllIndexes = []; // array of promises that will be fullfilled
-        // one after the other.
-        $.each(m.indexNames, function (unused, value) {
-            var filterText = $("#query-text-ui").val();
-            var url = params.switchURL + "?version=1.2&operation=scan&scanClause=" +
-                    value + "&x-filter=" + filterText + "&x-context=" + xcontext +
-                    "&x-format=json&maximumTerms=10";
-            requestsForAllIndexes.push($.getJSON(url));
-        });
-        // when used like this collects all the promises and then delevers all of
-        // them to the done function
-        $.when.apply($, requestsForAllIndexes).then(function () {
+
+        var filterText = $("#query-text-ui").val();
+        var url = params.switchURL + "?version=1.2&operation=scan&scanClause=autocomp" +
+                  "&x-filter=" + filterText + "&x-context=" + xcontext +
+                  "&x-format=json&maximumTerms=10";
+        var requestsForAllIndexes = $.getJSON(url);
+        requestsForAllIndexes.then(function (responseJSON) {
             var results = [];
-            $.each(arguments, function (index, responseData) {
-                for (var i = 0; i < responseData[2].responseJSON.terms.length; i++) {
-                    results.push(responseData[2].responseJSON.terms[i]);
-                }
-            });
+            for (var i = 0; i < responseJSON.terms.length; i++) {
+                results.push(responseJSON.terms[i]);
+            }
             gotFilteredSuggestions(results, callWhenDone);
         }, function(jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -108,10 +94,10 @@ String.prototype.replaceAll = function (search, replacement) {
         var firstTenOfsortedResults = [];
 
         sortedResults = results.sort(function (a, b) {
-            if (a.value > b.value) {
+            if (a.label > b.label) {
                 return 1;
             }
-            if (a.value < b.value) {
+            if (a.label < b.label) {
                 return -1;
             }
             return 0;
@@ -125,7 +111,7 @@ String.prototype.replaceAll = function (search, replacement) {
 
         callWhenDone($.map(firstTenOfsortedResults, function (item) {
             return {
-                label: item.value,
+                label: item.label,
                 value: item.key,
                 href: item.nextHref
             };
