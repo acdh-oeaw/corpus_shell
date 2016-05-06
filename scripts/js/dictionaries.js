@@ -94,10 +94,17 @@ String.prototype.replaceAll = function (search, replacement) {
         var firstTenOfsortedResults = [];
 
         sortedResults = results.sort(function (a, b) {
-            if (a.label > b.label) {
+			var alabel = a.label
+			.substr(0, a.label.indexOf('|'))
+			.trim()
+			.toLowerCase();
+			var blabel = b.label.substr(0, b.label.indexOf('|'))
+			.trim()
+			.toLowerCase();
+            if (alabel > blabel) {
                 return 1;
             }
-            if (a.label < b.label) {
+            if (alabel < blabel) {
                 return -1;
             }
             return 0;

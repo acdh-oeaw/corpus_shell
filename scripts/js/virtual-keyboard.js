@@ -73,6 +73,9 @@
         } else {
             input.selection('replace', {text: key.text(), caret: 'end'});
         }
+		if (input.hasClass('ui-autocomplete-input')) {
+			input.autocomplete("search");
+		}
     };
     
     var hideKeyboardOnESC = function(e) {
