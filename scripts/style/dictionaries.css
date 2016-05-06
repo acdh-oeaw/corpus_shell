@@ -117,7 +117,9 @@
    
   .ui-widget-content a {color:unset;}
   
-.ui-autocomplete-loading { background: #ffffff url('https://minerva.arz.oeaw.ac.at/static/images/dicts/ajax-loader.gif') no-repeat right center; }  
+.ui-autocomplete-loading { 
+	background: #ffffff url('https://minerva.arz.oeaw.ac.at/static/images/dicts/ajax-loader.gif') no-repeat right center; 
+	}  
    
 	.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
     background:#6291C6;
@@ -140,7 +142,7 @@
     
   .searchresults {width:100%;}
   
-  .ui-autocomplete {width:100px;}
+  .ui-autocomplete {width:260px;}
   
 
   
