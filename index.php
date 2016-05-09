@@ -11,8 +11,8 @@ use ACDH\FCSSRU\SRUWithFCSParameters,
     ACDH\FCSSRU\switchAggregator\FCSSwitch;
 
 $sru_fcs_params = new SRUWithFCSParameters("strict");
-if ($sru_fcs_params->xformat === "") {
-    $sru_fcs_params->xformat = 'htmlpagetable';
+if ($sru_fcs_params->xformat === 'htmlpagetable') {
+    $sru_fcs_params->xformat = 'htmlbootstrap';
 }
 $sru_fcs_params->operation = 'searchRetrieve';
 $sru_fcs_params->version = '1.2';
@@ -42,8 +42,8 @@ $sru_fcs_params->query = 'sense-en=Damascene';
 break;
 
    case 'localhost':
-$sru_fcs_params->xcontext = 'apc_eng_002';
-$sru_fcs_params->query = 'sense-en=Damascene';
+$sru_fcs_params->xcontext = 'pes_eng_033';
+$sru_fcs_params->query = 'lemma==fārsi';
 break;
 
 }
