@@ -27,23 +27,23 @@ switch ($_SERVER['SERVER_NAME']) {
 // query=senses==Persian
 $sru_fcs_params->xcontext = 'pes_eng_033';
 $sru_fcs_params->maximumRecords = '50';
-$sru_fcs_params->query = 'lemma==fārsi';
+$sru_fcs_params->setQuery('lem==fārsi');
 break;
     case 'zulu.hephaistos.arz.oeaw.ac.at':
 $sru_fcs_params->maximumRecords = '50';
 $sru_fcs_params->xcontext = 'zul_eng_016';
-$sru_fcs_params->query = 'lemma=zulu';
+$sru_fcs_params->setQuery('lemma=zulu');
 break;
     case 'damasz.hephaistos.arz.oeaw.ac.at':
 	case 'damasz.acdh.oeaw.ac.at':
 $sru_fcs_params->maximumRecords = '50';
 $sru_fcs_params->xcontext = 'apc_eng_002';
-$sru_fcs_params->query = 'sense-en=Damascene';
+$sru_fcs_params->setQuery('sense-en=Damascene');
 break;
 
    case 'localhost':
 $sru_fcs_params->xcontext = 'pes_eng_033';
-$sru_fcs_params->query = 'lemma==fārsi';
+$sru_fcs_params->setQuery('lem==fārsi');
 break;
 
 }
