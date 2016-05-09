@@ -13,12 +13,18 @@ String.prototype.replaceAll = function (search, replacement) {
     m.indexes = {};
     m.indexNames = [];
     m.href = new String;
-	m.specialChars = [];
+    m.specialChars = [];
+    m.cqlIdentifier = '("([^"])*")|([^\\s()=<>"\/]*)';
+    m.contextQLre = new RegExp('(' + m.cqlIdentifier + ') *((==?)|(>=?)|(<=?)|(any)|(exact)) *(' + m.cqlIdentifier +')');
 
     /* get the relevant indexes for the dictionary and store them in an array */
     m.getIndexes = $.getJSON(params.switchURL+"?version=1.2&operation=explain&x-context=" +
             xcontext + "&x-format=json");
 
+    function isContextQL(query) {       
+        return m.contextQLre.test(query);
+    }
+    
     function gotIndexesDone(data) {
         m.indexes = data.indexes;
         $.each(m.indexes, function (unused, value) {
@@ -46,7 +52,9 @@ String.prototype.replaceAll = function (search, replacement) {
 
     $('document').ready(function () {
         resultContainerLoaded();
-
+        // hide initial query
+        $("#query-text-ui").val($("#query-text-ui").data('searchstring'));
+        
         $('.navbar-collapse ul li a').click(function () {
             $('.navbar-toggle:visible').click();
         });
@@ -68,7 +76,7 @@ String.prototype.replaceAll = function (search, replacement) {
 
     function getFilteredSuggestions(unused, callWhenDone) {
         if (!m.ready) {
-        	callWhenDone();
+            callWhenDone();
             return;
         }
 
@@ -130,7 +138,7 @@ String.prototype.replaceAll = function (search, replacement) {
         $("#submit-query").hide();
         $(".loader").show();
         var searchTerm = $("#query-text-ui").val();
-        if ((searchTerm.indexOf('"') === -1) &&
+        if (!isContextQL(searchTerm) && (searchTerm.indexOf('"') === -1) &&
                 (searchTerm.indexOf(' ') !== -1)) {
             searchTerm = '"' + searchTerm + '"';
         }
