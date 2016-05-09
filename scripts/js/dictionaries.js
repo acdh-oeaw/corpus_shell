@@ -128,7 +128,7 @@ String.prototype.replaceAll = function (search, replacement) {
     function onSubmitForm(event) {
         event.preventDefault();
         $("#submit-query").hide();
-        $("#loader").show();
+        $(".loader").show();
         var searchTerm = $("#query-text-ui").val();
         if ((searchTerm[0] !== '"') &&
                 (searchTerm.indexOf(' ') !== -1)) {
@@ -149,7 +149,7 @@ String.prototype.replaceAll = function (search, replacement) {
     function resultContainerLoaded() {
         /* turn input field into autocomplete field, and fill with data from server for all relevant indexes */
 
-        $("#loader").hide();
+        $(".loader").hide();
         $("#submit-query").show();
         $("#query-text-ui").autocomplete({
             source: getFilteredSuggestions,
