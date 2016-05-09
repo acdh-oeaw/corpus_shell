@@ -110,6 +110,14 @@
      display:inline;
    }
    
+   .contexts.form-group {
+	   display: none;
+   }
+   
+   .result-pager {
+	   display: none;
+   }
+   
    .ui-widget-content {
    border:0px;
   

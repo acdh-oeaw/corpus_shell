@@ -130,7 +130,7 @@ String.prototype.replaceAll = function (search, replacement) {
         $("#submit-query").hide();
         $(".loader").show();
         var searchTerm = $("#query-text-ui").val();
-        if ((searchTerm[0] !== '"') &&
+        if ((searchTerm.indexOf('"') === -1) &&
                 (searchTerm.indexOf(' ') !== -1)) {
             searchTerm = '"' + searchTerm + '"';
         }
