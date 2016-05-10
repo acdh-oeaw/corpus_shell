@@ -136,7 +136,7 @@ String.prototype.replaceAll = function (search, replacement) {
     function onSubmitForm(event) {
         event.preventDefault();
         $("#submit-query").hide();
-        $(".loader").show();
+        $("#submit-query").next(".loader").show();
         var searchTerm = $("#query-text-ui").val();
         if (!isContextQL(searchTerm) && (searchTerm.indexOf('"') === -1) &&
                 (searchTerm.indexOf(' ') !== -1)) {
