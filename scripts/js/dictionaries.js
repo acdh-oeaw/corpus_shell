@@ -128,7 +128,9 @@ String.prototype.replaceAll = function (search, replacement) {
             return {
                 label: item.label,
                 value: item.key,
-                href: item.nextHref
+                href: item.nextHref,
+				index: item.index,
+				count: item.count
             };
         }));
     }
@@ -176,8 +178,9 @@ String.prototype.replaceAll = function (search, replacement) {
         }).data("autocomplete")._renderItem = function (ul, item) {
             var listItem = $("<li></li>")
                     .data("item.autocomplete", item)
-                    .append("<a>" + item.label + "</a>")
+                    .append("<a>" + item.label + "<span class='acmeta'> | "+item.count+" | "+item.index+"</span></a>")
                     .appendTo(ul);
+					console.log(item);
             var index = item.href.slice(item.href.search("query=") + 6, item.href.search("%3"));
 
             listItem.addClass(index);
