@@ -16,6 +16,7 @@ label, .label, .cmds-elem-prop .label {
 font-size: 0.9em;
 color: #014172;
 font-style: italic;
+padding-right: 0.3em;
 }
 .value-text {}
 .value-unspecified {}

@@ -20,7 +20,8 @@
     display:none;
     }
   
-  .tei-head {
+  .tei-head,
+  tr.record-top {
     display:none;
     }
   
