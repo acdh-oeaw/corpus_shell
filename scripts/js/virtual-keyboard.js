@@ -112,7 +112,9 @@
                 else
                     return;
             }
-            if (localContext === undefined || module.keys[localContext] === undefined) {
+            if (localContext === undefined || 
+                module.keys[localContext] === undefined || 
+                module.keys[localContext].length === 0) {
                 toggleCb.hide();
                 toggleLabel.hide();
                 return;                

@@ -65,34 +65,11 @@
      padding: 0 0.3em 0 0.3em;
  }
  
-  .virtual-keyboard-with-icon input.virtual-keyboard-toggle ~ label i {
-	 color:grey;
-	 font-size:16px;
-	 -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-     box-shadow: none;
- }
- 
- .virtual-keyboard-with-icon input.virtual-keyboard-toggle ~ label {
-      background:none;
-	 -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-     box-shadow: none;
- }
- 
  ul.virtual-keyboard li:active,
  input.virtual-keyboard-toggle:checked ~ label {
      -webkit-box-shadow: none;
      -moz-box-shadow: none;
      box-shadow: none;
- }
- 
- input.virtual-keyboard-toggle:checked ~ label i {
-     -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-     box-shadow: none;
-	 color:black;
-	 
  }
  
  ul.virtual-keyboard:after {
