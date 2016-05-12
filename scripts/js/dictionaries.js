@@ -153,7 +153,7 @@ String.prototype.replaceAll = function (search, replacement) {
         }
 
         var encodedHref = m.href.replaceAll('"', '%22').replaceAll(' ', '%20');
-        $("#searchcontainer").load(encodedHref + " .searchresults", resultContainerLoaded);
+        $("#searchcontainer").load(encodedHref + " .searchresults, input#exampleToggle", resultContainerLoaded);
     }
 
     function resultContainerLoaded() {
