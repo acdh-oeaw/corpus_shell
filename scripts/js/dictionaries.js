@@ -52,8 +52,6 @@ String.prototype.replaceAll = function (search, replacement) {
 
     $('document').ready(function () {
         resultContainerLoaded();
-        // hide initial query
-        $("#query-text-ui").val($("#query-text-ui").data('searchstring'));
         
         $('.navbar-collapse ul li a').click(function () {
             $('.navbar-toggle:visible').click();
@@ -189,6 +187,8 @@ String.prototype.replaceAll = function (search, replacement) {
         };
         
         VirtualKeyboard.attachKeyboards();
+        // hide query
+        $("#query-text-ui").val($("#query-text-ui").data('searchstring'));
         m.href = '';
     }
     
