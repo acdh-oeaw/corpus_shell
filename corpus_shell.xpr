@@ -14,51 +14,6 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>http://localhost/Unbenannt1.html</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>persengldict db10</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>http://localhost/corpus_shell/modules/fcs-aggregator/switch.php?version=1.2&amp;operation=searchRetrieve&amp;query=English==Persian&amp;x-context=pes_eng_033&amp;startRecord=1&amp;maximumRecords=10&amp;XDEBUG_SESSION_START=netbeans-xdebug</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>vicav_glossary</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>https://persengldict.acdh.oeaw.ac.at/Unbenannt4.html</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>persengldict db10</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
                                     <String>xsl/profile.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
@@ -99,6 +54,51 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>http://localhost/Unbenannt1.html</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>persengldict db10</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>http://localhost/corpus_shell/modules/fcs-aggregator/switch.php?version=1.2&amp;operation=searchRetrieve&amp;query=English==Persian&amp;x-context=pes_eng_033&amp;startRecord=1&amp;maximumRecords=10&amp;XDEBUG_SESSION_START=netbeans-xdebug</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>vicav_glossary</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>https://persengldict.acdh.oeaw.ac.at/Unbenannt4.html</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>persengldict db10</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
                                     </list>
                                 </field>
                             </scenarioAssociation>
