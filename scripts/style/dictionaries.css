@@ -192,22 +192,22 @@
   	font-style: inherit;
   }
 
-  input#exampleToggle:checked ~ * label#exampleToggle::after {
+  #exampleToggle:checked ~ * #exampleToggleLabel::after {
     font-family: "FontAwesome";
     content: "\f00c";
   }
 
-  input#exampleToggle:checked ~ * .apc_eng_002 label#exampleToggle::after,
-  input#exampleToggle:checked ~ * .pes_eng_033 label#exampleToggle::after {
+  #exampleToggle:checked ~ * .apc_eng_002 #exampleToggleLabel::after,
+  #exampleToggle:checked ~ * .pes_eng_033 #exampleToggleLabel::after {
     color: #fff;
   }
 
-  input#exampleToggle:checked ~ * .apc_eng_002 label#exampleToggle::before {
+  #exampleToggle:checked ~ * .apc_eng_002 #exampleToggleLabel::before {
     background-color: #5bc0de;
     border-color: #5bc0de;
   }
 
-  input#exampleToggle:checked ~ * .pes_eng_033 label#exampleToggle::before {
+  #exampleToggle:checked ~ * .pes_eng_033 #exampleToggleLabel::before {
     background-color: #f0ad4e;
     border-color: #f0ad4e;
   }
@@ -216,7 +216,7 @@
   	display: none;
   }
 
-  input#exampleToggle:checked ~ * .dvExample {
+  #exampleToggle:checked ~ * .dvExample {
   	display: block;
   }
   

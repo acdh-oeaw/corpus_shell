@@ -144,3 +144,27 @@ input.virtual-keyboard-input {
     clear: left;
     margin-right: 1em;
 }
+
+.error {
+  position: relative;
+  width: 100%;
+}
+
+.diag-details {
+  display: none;
+  position: relative;
+  width: 60%;
+}
+
+.xsl-diag-details-label ~ .xsl-separator {
+ display: none;
+}
+
+.xsl-diag-details-label:hover ~ .xsl-separator {
+  display: inline;
+}
+  
+.xsl-diag-details-label:hover ~ .diag-details,
+.diag-details:hover {
+  display: block;
+}

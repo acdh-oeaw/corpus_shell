@@ -81,7 +81,7 @@ String.prototype.replaceAll = function (search, replacement) {
         var filterText = $("#query-text-ui").val();
         var url = params.switchURL + "?version=1.2&operation=scan&scanClause=autocomp" +
                   "&x-filter=" + filterText + "&x-context=" + xcontext +
-                  "&x-format=json&maximumTerms=10";
+                  "&x-format=json&maximumTerms=10&maximumRecords=1000";
         var requestsForAllIndexes = $.getJSON(url);
         requestsForAllIndexes.then(function (responseJSON) {
             var results = [];
@@ -147,11 +147,11 @@ String.prototype.replaceAll = function (search, replacement) {
         if (m.href === '') {
             m.href = params.switchURL + "?version=1.2&operation=searchRetrieve&query=" +
                     encodeURIComponent(searchTerm) + "&x-context=" + xcontext +
-                    "&x-userlangs=" + m.userLangs.join() + "&startRecord=1&maximumRecords=50&x-format=htmlpagetable";
+                    "&x-userlangs=" + m.userLangs.join() + "&startRecord=1&maximumRecords=1000&x-format=htmlpagetable";
         }
 
         var encodedHref = m.href.replaceAll('"', '%22').replaceAll(' ', '%20');
-        $("#searchcontainer").load(encodedHref + " .searchresults, input#exampleToggle", resultContainerLoaded);
+        $("#searchcontainer").load(encodedHref + " .error, .searchresults, input#exampleToggle", resultContainerLoaded);
     }
 
     function resultContainerLoaded() {
