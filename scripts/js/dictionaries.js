@@ -21,6 +21,7 @@ String.prototype.replaceAll = function (search, replacement) {
     m.currentURI = new URI();
     m.protocol = m.currentURI.protocol();
     m.callWhenDoneForAutocomplete;
+    m.showExamplesToggle = true;
 
     /* get the relevant indexes for the dictionary and store them in an array */
     m.getIndexes = $.getJSON(params.switchURL+"?version=1.2&operation=explain&x-context=" +
@@ -168,6 +169,7 @@ String.prototype.replaceAll = function (search, replacement) {
         }
 
         m.href = m.href.replaceAll('"', '%22').replaceAll(' ', '%20');
+        m.showExamplesToggle = $('#exampleToggle').prop('checked');
         $("#searchcontainer").load(m.href + " .error, .searchresults, input#exampleToggle", resultContainerLoaded);
     }
     
@@ -187,8 +189,6 @@ String.prototype.replaceAll = function (search, replacement) {
     History.Adapter.bind(window,'statechange',onGoBackForward);
 
     function resultContainerLoaded() {
-        /* turn input field into autocomplete field, and fill with data from server for all relevant indexes */
-
         $(".loader").hide();
         $("#submit-query").show();
         if (m.pushState && (m.href.length !== 0)) {
@@ -201,6 +201,7 @@ String.prototype.replaceAll = function (search, replacement) {
             m.processState = true;
         }
         m.pushState = true;
+        /* turn input field into autocomplete field, and fill with data from server for all relevant indexes */
         $("#query-text-ui").autocomplete({
             source: getFilteredSuggestions,
             minLength: 1,
@@ -227,6 +228,7 @@ String.prototype.replaceAll = function (search, replacement) {
 
             return listItem;
         };
+        $('#exampleToggle').prop('checked', m.showExamplesToggle);
         
         VirtualKeyboard.attachKeyboards();
         // hide query
