@@ -14,16 +14,46 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xsl/tests/build.xml</String>
+                                    <String>http://localhost/corpus_shell//modules/fcs-aggregator/switch.php?version=1.2&amp;operation=searchRetrieve&amp;query=Lemma%3Dkardan&amp;x-context=pes_eng_033&amp;startRecord=1&amp;maximumRecords=1000&amp;x-format=htmlpagetable&amp;x-dataview=kwic,title&amp;XDEBUG_SESSION_START=netbeans-xdebug</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>ANT tests</String>
+                                        <String>vicav_glossary</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
                                     <list>
-                                        <String>ANT</String>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>http://localhost/corpus_shell//modules/fcs-aggregator/switch.php?version=1.2&amp;operation=searchRetrieve&amp;query=Lemma%3Dkardan&amp;x-context=pes_eng_033&amp;startRecord=1&amp;maximumRecords=1000&amp;x-dataview=kwic,title</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>persengldict db10</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/tests/input/glossary/tunisian_water.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>vicav_glossary</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
                                     </list>
                                 </field>
                             </scenarioAssociation>
@@ -54,6 +84,21 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/tests/build.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ANT tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>ANT</String>
                                     </list>
                                 </field>
                             </scenarioAssociation>
