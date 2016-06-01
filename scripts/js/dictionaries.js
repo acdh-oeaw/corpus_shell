@@ -4,7 +4,7 @@ String.prototype.replaceAll = function (search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
-!function ($, VirtualKeyboard, params, xcontext, navigator, URI) {
+!function ($, VirtualKeyboard, params, xcontext, navigator, URI, History) {
     var m = {};
     m.ready = false;
     m.userLangs = navigator.languages;
@@ -16,6 +16,11 @@ String.prototype.replaceAll = function (search, replacement) {
     m.specialChars = [];
     m.cqlIdentifier = '("([^"])*")|([^\\s()=<>"\/]*)';
     m.contextQLre = new RegExp('(' + m.cqlIdentifier + ') *((==?)|(>=?)|(<=?)|(any)|(exact)) *(' + m.cqlIdentifier +')');
+    m.processState = true;
+    m.pushState = true;
+    m.currentURI = new URI();
+    m.protocol = m.currentURI.protocol();
+    m.callWhenDoneForAutocomplete;
 
     /* get the relevant indexes for the dictionary and store them in an array */
     m.getIndexes = $.getJSON(params.switchURL+"?version=1.2&operation=explain&x-context=" +
@@ -73,7 +78,7 @@ String.prototype.replaceAll = function (search, replacement) {
     });
 
     function getFilteredSuggestions(unused, callWhenDone) {
-        if (!m.ready) {
+        if (!m.ready || m.callWhenDoneForAutocomplete !== undefined) {
             callWhenDone();
             return;
         }
@@ -83,19 +88,24 @@ String.prototype.replaceAll = function (search, replacement) {
                   "&x-filter=" + filterText + "&x-context=" + xcontext +
                   "&x-format=json&maximumTerms=10&maximumRecords=1000";
         var requestsForAllIndexes = $.getJSON(url);
+        m.callWhenDoneForAutocomplete = callWhenDone;
         requestsForAllIndexes.then(function (responseJSON) {
             var results = [];
             for (var i = 0; i < responseJSON.terms.length; i++) {
                 results.push(responseJSON.terms[i]);
             }
-            gotFilteredSuggestions(results, callWhenDone);
+            gotFilteredSuggestions(results);
         }, function(jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
-            callWhenDone();
+            m.callWhenDoneForAutocomplete();
+            m.callWhenDoneForAutocomplete = undefined;
         });
     }
 
-    function gotFilteredSuggestions(results, callWhenDone) {
+    function gotFilteredSuggestions(results) {
+    	if (m.callWhenDoneForAutocomplete === undefined) {
+    		return;
+    	}
         var sortedResults = [];
         var firstTenOfsortedResults = [];
 
@@ -122,7 +132,7 @@ String.prototype.replaceAll = function (search, replacement) {
             }
         }
 
-        callWhenDone($.map(firstTenOfsortedResults, function (item) {
+        m.callWhenDoneForAutocomplete($.map(firstTenOfsortedResults, function (item) {
             return {
                 label: item.label,
                 value: item.key,
@@ -131,10 +141,17 @@ String.prototype.replaceAll = function (search, replacement) {
 				count: item.count
             };
         }));
+    	m.callWhenDoneForAutocomplete = undefined;
     }
 
     function onSubmitForm(event) {
-        event.preventDefault();
+        if (event !== undefined) {
+            event.preventDefault();
+        }
+        if (m.callWhenDoneForAutocomplete !== undefined) {
+        	m.callWhenDoneForAutocomplete();
+        	m.callWhenDoneForAutocomplete = undefined;
+        }
         $("#submit-query").hide();
         $("#submit-query").next(".loader").show();
         var searchTerm = $("#query-text-ui").val();
@@ -150,15 +167,40 @@ String.prototype.replaceAll = function (search, replacement) {
                     "&x-userlangs=" + m.userLangs.join() + "&startRecord=1&maximumRecords=1000&x-format=htmlpagetable";
         }
 
-        var encodedHref = m.href.replaceAll('"', '%22').replaceAll(' ', '%20');
-        $("#searchcontainer").load(encodedHref + " .error, .searchresults, input#exampleToggle", resultContainerLoaded);
+        m.href = m.href.replaceAll('"', '%22').replaceAll(' ', '%20');
+        $("#searchcontainer").load(m.href + " .error, .searchresults, input#exampleToggle", resultContainerLoaded);
     }
+    
+    function onGoBackForward(event) {
+        var state = History.getState();
+        if (m.processState && (state !== undefined)) {
+        	var newSearch = new URI(state.cleanUrl);
+        	newSearch.setSearch(state.data);
+            m.href = new String(newSearch.href());
+        	m.pushState = false;
+            onSubmitForm(undefined)
+        } else {
+            m.processState = true;
+        }
+    }
+    
+    History.Adapter.bind(window,'statechange',onGoBackForward);
 
     function resultContainerLoaded() {
         /* turn input field into autocomplete field, and fill with data from server for all relevant indexes */
 
         $(".loader").hide();
         $("#submit-query").show();
+        if (m.pushState && (m.href.length !== 0)) {
+            var hrefParsed = new URI(m.protocol + ':' + m.href);            
+            var searchParameters = hrefParsed.search(true);
+            searchParameters['x-format'] = 'htmlbootstrap';
+            hrefParsed.setSearch(searchParameters);
+            m.processState = false;
+            History.pushState(searchParameters, "", hrefParsed.href());
+            m.processState = true;
+        }
+        m.pushState = true;
         $("#query-text-ui").autocomplete({
             source: getFilteredSuggestions,
             minLength: 1,
@@ -204,4 +246,4 @@ String.prototype.replaceAll = function (search, replacement) {
         $('form#searchretrieve').submit();
         console.log(searchConfig);
     }
-}(jQuery, VirtualKeyboard, params, xcontext, navigator, URI)
+}(jQuery, VirtualKeyboard, params, xcontext, navigator, URI, History)
