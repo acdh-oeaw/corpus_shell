@@ -32,6 +32,9 @@ String.prototype.replaceAll = function (search, replacement) {
     var m = {};
     m.ready = false;
     m.userLangs = navigator.languages;
+	if (m.userLangs === undefined) {
+		m.userLangs = [navigator.language];
+	}
     m.userLang = m.userLangs[0];
     m.autoCompleteDelay = 200;
     m.indexes = {};
