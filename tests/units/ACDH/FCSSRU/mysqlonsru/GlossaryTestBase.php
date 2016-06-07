@@ -10,6 +10,9 @@ use Tests\Common\XPathTestCase,
 
 $runner = true;
 
+// use contents of tests/config.
+$_SERVER['DOCUMENT_ROOT'] = __DIR__ . '/../../../../config';
+
 require_once __DIR__ . '/../../../../../modules/utils-php/common.php';
 require_once __DIR__ . '/../../../../../vendor/autoload.php';
 require_once __DIR__ . '/../../../../common/XPathTestCase.php';
@@ -76,14 +79,17 @@ abstract class GlossaryTestBase extends XPathTestCase {
                "WHERE ".$this->protectedSRUFromMysql->_and("ndx.txt LIKE '%' ", $ndxAndCondition);
             $innerSql = $this->getInnerSql($whereClause, $prefilter);
             $this->expectedSqls = array(
-            "SELECT ndx.txt, base.entry, base.sid, COUNT(*) FROM $this->context AS base ".
-            $innerSql.
+            "SELECT  ndx.txt, base.entry, base.sid, COUNT(*) FROM $this->context AS base ".
+            "INNER JOIN ".
+                "(SELECT ndx.id, ndx.txt FROM ".
+                $prefilter .
+                "WHERE ndx.txt LIKE '%' GROUP BY ndx.id) AS ndx ".
             "ON base.id = ndx.id WHERE base.id > 700 GROUP BY ndx.txt ORDER BY ndx.txt",            
             );
         }
         $this->dbMock->expects($this->exactly(1))->method('query')
                 ->with($this->expectedSqls[0])
-                ->willReturn(false);        
+                ->willReturn($result);        
     }
     
     protected function getInnerSql($whereClause, $prefilter) {
@@ -156,7 +162,7 @@ abstract class GlossaryTestBase extends XPathTestCase {
         $dbMock->error = 'Mock: no error.';
         $dbMock->expects($this->exactly(1))->method('query')
                 ->with("SELECT entry FROM $context WHERE id = 1")
-                ->willReturn(false);       
+                ->willReturn(false);      
         $ref = new \ReflectionProperty('ACDH\FCSSRU\mysqlonsru\GlossaryOnSRU', 'db');
         $ref->setAccessible(true);
         $ref->setValue($glossary, $dbMock);
@@ -175,10 +181,10 @@ abstract class GlossaryTestBase extends XPathTestCase {
         );
         foreach ($indexes as $index) {
             $ret['index '.$index->textContent] = array($index->textContent);
-        }
+    }
         return $ret;
     }
-        
+    
     public function searchableIndexesProvider() {
         return $this->getAllIndexes('search');        
     }
@@ -193,6 +199,26 @@ abstract class GlossaryTestBase extends XPathTestCase {
     
     public function nativeIndexesProvider() {
         return $this->getAllIndexes('native');        
+    }
+}
+
+class DummyResult {
+    
+    private $dummyResults;
+    
+    private $current_row;
+    
+    public $num_rows;
+    
+    public function __construct(array $dummyResults) {
+        $this->dummyResults = $dummyResults;
+        $this->num_rows = count($dummyResults);
+        $this->current_row = 0;
+    }
+    
+    public function fetch_array() {
+        if ($this->current_row === $this->num_rows) {return null;}
+        return $this->dummyResults[$this->current_row++];
     }
 }
 

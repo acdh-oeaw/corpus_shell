@@ -640,6 +640,11 @@ a.searchresult:hover, a.searchresult:focus {
 	position: relative;
 }
 
+.searchresults .link-fcs-xml.debug,
+.searchresults .link-tei.debug {
+	display: none;
+}
+
 input.searchstring, select.searchcombo {
 	border: 1px solid #CCCCCC;
 	width: 183px;
@@ -1224,3 +1229,11 @@ margin: 2px;
 .cmds-xmlelem .attributes .value {}
 .cmds-xmlelem .attributes .value:before {content: "=";}
 
+.loader {
+	display:none;
+}
+
+fieldset {
+	padding: 0 0 0 0;
+	border: none;
+}

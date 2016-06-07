@@ -1,3 +1,26 @@
+/* 
+ * The MIT License
+ *
+ * Copyright 2016 OEAW/ACDH.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 
 /**
  * @class CQLConfig
@@ -19,7 +42,7 @@ function CQLConfig(options) {
                     "explain_url": "%s?operation=explain&x-format=json",
                     "scan_base_url": "%s?x-context=&x-format=json&operation=scan&scanClause=%s&sort=size&maximumTerms=%d", /* call without pattern restriction (for initial call) */
                     "scan_pattern_url": "%s?x-context=&x-format=json&operation=scan&scanClause=%s=%s", /* placeholders will be replaced with index and (optional) pattern */
-                   "x_context": "",
+                   "context": "",
                    "values_limit": 200,
                    "onLoaded": function(index) { console.log("loaded index: " + index) }
                   };
@@ -82,10 +105,42 @@ function CQLConfig(options) {
         }
     };
 
+
+    this.getValues = function (index, pattern, response) {
+        var scan_url = sprintf(this.settings.scan_pattern_url,this.settings.base_url,index,pattern).replace(/&amp;/g,'&');
+        
+        var me = this;
+        /*
+        $.getJSON("http://api.rottentomatoes.com/api/public/v1.0/movies.json?callback=?", {
+				q: request.term,
+				page_limit: 10
+			}, function(data) {
+				// data is an array of objects and must be transformed for autocomplete to use
+				var array = data.error ? [] : $.map(data.movies, function(m) {
+					return {
+						label: m.title + " (" + m.year + ")",
+						url: m.links.alternate
+					};
+				});
+				response(array);
+			});
+			*/
+        $.getJSON(scan_url, function(data) {
+                         // console.log(data);
+    //                         me.values[index] = data;
+      //                 me.onLoaded.call(me, index);
+                    var array = data.error ? [] : data.terms
+                         response(array);
+                   });
+       return {"status":"loading"};
+    }
+
     /*: read (and cache) the scan on demand
-        TODO: how to handle large indexes? 
+        TODO: how to handle large indexes?
+        
+        nice idea (caching) , but did not get to work properly
     */
-    this.getValues = function (index, pattern) {
+    this.getValues_withCache = function (index, pattern) {
     
         if (this.values[index]) {
            
@@ -113,11 +168,17 @@ function CQLConfig(options) {
              }
              
              // return filtered result if available
+           if (this.values[index][pattern]) {
            if (this.values[index][pattern].hasOwnProperty("terms")) {
                    return  this.values[index][pattern].terms;
               } else { 
                     return this.values[index][pattern]; 
               }
+           } else { // fallback return what we have
+               if (this.values[index].hasOwnProperty("terms")) {
+                        return this.values[index].terms;
+               }
+           } 
              
              
         } else {

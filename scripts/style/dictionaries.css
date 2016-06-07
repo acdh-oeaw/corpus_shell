@@ -1,7 +1,238 @@
-#header > div {clear:none;}
-		#logo {float:left;max-width:200px;}	
-		#main > div:first-child {display:block;}
-		#main > div:not(:first-child) {display:none;}
-		.tei-head {display:none;}
-		.navbar {min-height:20px;cursor:pointer;height:28px;}
-		.navbar-nav > li > a {padding-bottom:0px;padding-top:0px;line-height:28px;}
+  .jumbotron {
+    cursor:pointer;
+
+  }
+  
+  #header > div {
+    clear:none;
+  }
+  
+  #logo {
+    float:left;
+    max-width:200px;
+    }
+    
+  #main > div:first-child {
+    display:block;
+    }
+  
+  #main > div:not(:first-child) {
+    display:none;
+    }
+  
+  .tei-head,
+  tr.record-top {
+    display:none;
+    }
+  
+  .nav {cursor:pointer;}
+  
+  
+ 
+  
+  #searchcontainer {
+    float:left;
+    display:none;
+		padding:0;
+  }
+  
+  .form-control {
+    font-size:.8em;
+    height:2rem;
+    padding:0;
+  }
+    
+  #submit-query {
+      height:2rem;
+      padding:0;
+      margin-left:0.5%;
+      width:23%;
+      display:inline;
+  }
+    
+  .internal.prev,.internal.next {
+			position:static;
+	}
+  .internal.prev {
+			float:left;
+		}
+    
+  .internal.next {
+			float:right;
+		}
+    
+  .cmd_prev {
+			left:0;
+			padding:0 .5rem;
+			display:none;
+		}
+    
+  .cmd_next {
+    right:0;
+    padding:0 .5rem;
+	display:none;
+		}
+    
+    .disabled {
+		visibility:hidden;
+		}
+    
+    .result-body {
+			margin-top:2rem;
+		}
+    
+    .navbar-inverse {
+			border-radius:0;
+			background-image:none;
+		}
+    
+    .row {
+			margin:0!important;
+		}
+    
+    .result-navigation p {
+			padding-left:1rem;
+    }
+    
+    #querysearch br,.note,  .ui-widget-header {
+      display:none;
+    }
+    
+    .loader {
+      width:23%;
+      display:none;
+      float:right;
+      text-align:center;
+      }
+      
+   #query-text-ui {
+     margin-left:0.5%;
+     width:75%;
+     display:inline;
+   }
+   
+   .contexts.form-group {
+	   display: none;
+   }
+   
+   .result-pager {
+	   display: none;
+   }
+   
+   .ui-widget-content {
+   border:0px;
+  
+   }
+   
+  .ui-widget-content a {color:unset;}
+  
+.ui-autocomplete-loading { 
+	background: #ffffff url('https://minerva.arz.oeaw.ac.at/static/images/dicts/ajax-loader.gif') no-repeat right center; 
+	}  
+   
+	.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
+    background:#6291C6;
+    color:#fff;
+    border-radius:0;
+	border:none;
+	}
+   
+   
+   #operator {
+     margin-left:0.5%;
+     width:30%;
+     display:inline;
+   }
+   
+   #field {
+     width:22%;
+     display:inline;
+   }
+  
+  .ui-autocomplete {width:260px;}
+  
+
+  
+         
+  @media screen and (min-device-width: 1200px) {
+  .container {
+    margin-left:2rem;
+    }
+  
+  .navbar {min-height:20px;}
+	
+  .navbar-brand {
+	height:auto;
+	} 
+	
+  .navbar-nav > li > a {
+			padding-top:5px;
+			padding-bottom:5px;
+  }
+ 
+	
+  }
+  
+  input.virtual-keyboard-toggle ~ label {
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    margin: auto;
+    color: #AAA;
+	padding: 0 0 0 0;
+  }
+  
+  input.virtual-keyboard-toggle:checked ~ label {
+    color: #000;
+  }
+
+  .checkbox label {
+  	color: inherit;
+  	font-style: inherit;
+  }
+
+  #exampleToggle:checked ~ * #exampleToggleLabel::after {
+    font-family: "FontAwesome";
+    content: "\f00c";
+  }
+
+  #exampleToggle:checked ~ * .apc_eng_002 #exampleToggleLabel::after,
+  #exampleToggle:checked ~ * .pes_eng_033 #exampleToggleLabel::after {
+    color: #fff;
+  }
+
+  #exampleToggle:checked ~ * .apc_eng_002 #exampleToggleLabel::before {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+  }
+
+  #exampleToggle:checked ~ * .pes_eng_033 #exampleToggleLabel::before {
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+  }
+
+  .dvExample {
+  	display: none;
+  }
+
+  #exampleToggle:checked ~ * .dvExample {
+  	display: block;
+  }
+  
+  @media screen and (-webkit-min-device-pixel-ratio: 3.0) and (max-width: 1080px),
+		screen and (max-width: 480px) {
+		.container {margin-left:0;}
+		#searchcontainer {width:100%;}
+		}
+  
+	.link-fcs-xml {display:none;}
+	.link-tei {display:none;} 
+	.counter {display:none;}       
+	.virtual-keyboard-input-combo {width:75%;} 
+
+  a.ui-corner-all {float:left;}	
+  .acmeta {color:#AAA;}
+    
+  
+  
