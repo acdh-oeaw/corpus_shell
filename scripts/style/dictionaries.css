@@ -192,26 +192,6 @@
   	font-style: inherit;
   }
 
-  #exampleToggle:checked ~ * #exampleToggleLabel::after {
-    font-family: "FontAwesome";
-    content: "\f00c";
-  }
-
-  #exampleToggle:checked ~ * .apc_eng_002 #exampleToggleLabel::after,
-  #exampleToggle:checked ~ * .pes_eng_033 #exampleToggleLabel::after {
-    color: #fff;
-  }
-
-  #exampleToggle:checked ~ * .apc_eng_002 #exampleToggleLabel::before {
-    background-color: #5bc0de;
-    border-color: #5bc0de;
-  }
-
-  #exampleToggle:checked ~ * .pes_eng_033 #exampleToggleLabel::before {
-    background-color: #f0ad4e;
-    border-color: #f0ad4e;
-  }
-
   .dvExample {
   	display: none;
   }
