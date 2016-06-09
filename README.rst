@@ -45,4 +45,11 @@ Simple answer
 Advanced answer
 	If you want to expose your own data to the world then it gets way more complicated. You need a server capable of interpreting
 	PHP 5.3 or better and perhaps an exsit-db or mysql/mariadb database for storing and retrieving your data. Detailed instructions
-	on how to do such a setup (may) follow (soon).  
+	on how to do such a setup (may) follow (soon).
+
+*********
+More docs
+*********
+
+* `TODO <docs/TODO.md>`_
+* `Design <docs/Design.md>`_: A document about design decissions.
