@@ -48,7 +48,8 @@ Simple answer
 Advanced answer
 	If you want to expose your own data to the world then it gets way more complicated. You need a server capable of interpreting
 	PHP 5.3 or better and perhaps an exsit-db or mysql/mariadb database for storing and retrieving your data. Detailed instructions
-	on how to do such a setup (may) follow (soon).
+	on how to do such a setup (may) follow (soon). Until then have a look at `this Dockerfile <https://github.com/acdh-oeaw/docker-tools/blob/master/images/corpus_shell/Dockerfile>`_, which contains the automated
+	instructions for setting up an instance.
 
 *********
 More docs
