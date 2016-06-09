@@ -14,7 +14,10 @@ We recognize following basic components to the framework:
 `Aggregator <https://github.com/acdh-oeaw/fcs-aggregator>`_
     a service that is able to dispatch a query to multiple target repositories, and merge the result back.
     Currently we have a basic php-implementation fcs/aggreagtor/switch.php 
-    which however is not yet able to query multiple target repositories at once. 
+    which however is not yet able to query multiple target repositories at once.
+    
+`XSL Libraray <https://github.com/acdh-oeaw/cs-xsl>`_
+    an XSL library that transfroms the FCS/SRU responses to HTML snippets, HTML pages or other formats like JSON
 
 Wrapper
     services that translate between existing systems and the protocol. Currently we have (in an early dirty version):
@@ -22,7 +25,7 @@ Wrapper
       - *php* - `implementations accessing MySQL-db for Dictionaries <https://github.com/acdh-oeaw/mysqlonsru>`_ (Note that there is a `separate project for entering the data into the db <https://github.com/acdh-oeaw/vleserver>`_)
       - *xquery* - `implementation <https://github.com/acdh-oeaw/cr-xq-mets/tree/master/src/modules/fcs>`_ for `eXist-based content repository <https://github.com/acdh-oeaw/cr-xq-mets>`_
       - *perl* implementation mapping to ddc-api (corpus search engine) 
-        allowing to access our (public) corpora (not checked in yet) 
+        allowing to access our (public) corpora (not checked in yet)
 
 `Workspace <index.html>`_
     main user-interface allowing to select targets, issues queries, 
