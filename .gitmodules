@@ -1,6 +1,3 @@
-[submodule "modules/utils-php"]
-	path = modules/utils-php
-	url = https://github.com/acdh-oeaw/utils-php.git
 [submodule "modules/mysqlonsru"]
 	path = modules/mysqlonsru
 	url = https://github.com/acdh-oeaw/mysqlonsru.git
