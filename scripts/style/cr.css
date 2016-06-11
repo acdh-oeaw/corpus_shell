@@ -16,6 +16,7 @@ label, .label, .cmds-elem-prop .label {
 font-size: 0.9em;
 color: #014172;
 font-style: italic;
+padding-right: 0.3em;
 }
 .value-text {}
 .value-unspecified {}
@@ -157,4 +158,28 @@ input.virtual-keyboard-input {
     float: left;
     clear: left;
     margin-right: 1em;
+}
+
+.error {
+  position: relative;
+  width: 100%;
+}
+
+.diag-details {
+  display: none;
+  position: relative;
+  width: 60%;
+}
+
+.xsl-diag-details-label ~ .xsl-separator {
+ display: none;
+}
+
+.xsl-diag-details-label:hover ~ .xsl-separator {
+  display: inline;
+}
+  
+.xsl-diag-details-label:hover ~ .diag-details,
+.diag-details:hover {
+  display: block;
 }
