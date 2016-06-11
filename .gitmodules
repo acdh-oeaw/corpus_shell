@@ -4,9 +4,6 @@
 [submodule "modules/mysqlonsru"]
 	path = modules/mysqlonsru
 	url = https://github.com/acdh-oeaw/mysqlonsru.git
-[submodule "modules/fcs-aggregator"]
-	path = modules/fcs-aggregator
-	url = https://github.com/acdh-oeaw/fcs-aggregator.git
 [submodule "scripts/js/openlayers"]
 	path = scripts/js/openlayers
 	url = https://github.com/openlayers/openlayers.git
