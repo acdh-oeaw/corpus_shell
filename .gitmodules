@@ -1,9 +1,6 @@
 [submodule "modules/utils-php"]
 	path = modules/utils-php
 	url = https://github.com/acdh-oeaw/utils-php.git
-[submodule "xsl"]
-	path = xsl
-	url = https://github.com/simar0at/cs-xsl.git
 [submodule "modules/mysqlonsru"]
 	path = modules/mysqlonsru
 	url = https://github.com/acdh-oeaw/mysqlonsru.git
