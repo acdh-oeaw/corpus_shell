@@ -31,10 +31,7 @@
 	new feature: add items of type == "fcs.resource"
 */
 
-//  CHANGE THIS FOR RELEASE
-//  $configUrl = "../../sru/switch.config";
-  $configUrl = "../../modules/fcs-aggregator/switch.config";
-  $localhost = "corpus3.aac.ac.at";
+  require_once "../../modules/utils-php/common.php";
 
   $ddcConfig = "../../modules/fcs-aggregator/fcs.resource.config.php";
   $ddcConfigFound = false;
@@ -60,7 +57,7 @@
   print "var SearchConfig = new Array();\n";
 
   $doc = new DOMDocument;
-  $doc->Load($configUrl);
+  $doc->Load($switchConfig);
 
   $xpath = new DOMXPath($doc);
   $query = '//item';
@@ -101,4 +98,3 @@
      }
 
   }
-?>
