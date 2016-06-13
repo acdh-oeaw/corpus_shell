@@ -23,6 +23,9 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-execute": "^0.2.2",
-    "jscc-node": "^0.3.0"
+    "grunt-jsdoc": "^2.1.0",
+    "jscc-node": "^0.3.0",
+    "jsdoc": "^3.4.0",
+    "jsdoc-plugin-strip-outer-iife": "0.0.2"
   }
 }
