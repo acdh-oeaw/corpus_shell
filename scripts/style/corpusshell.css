@@ -256,8 +256,11 @@ table {
     height: calc(100% - 5px);
 }
 
-.c_s-searchresults-container .searchresults img {
+.c_s-searchresults-container .searchresults .tei-head  img {
     width: 320px;
+}
+.c_s-searchresults-container .searchresults .tei-head > img,
+.c_s-searchresults-container .searchresults .tei-head > .img-with-text {
     float: right;
     margin: 3px;
 }
@@ -276,7 +279,9 @@ table {
        not available in Firefox below 21 (e.g. 17)*/
     height: 100%;
     padding-right: 3px;
-    overflow: auto;
+	/* Spec is broken somewhat, can only be solved with JavaScript*/
+	overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /*
