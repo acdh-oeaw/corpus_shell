@@ -9,3 +9,4 @@
 * The [module JS pattern](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html) should be used everywhere.
 * There should be [Jasmine](http://jasmine.github.io/2.4/introduction.html) tests/specs for everathing.
 * Replace the sub repository structure with a composer based dependency tracking.
+* jsdoc has problems with [iife/the JS module pattern](https://github.com/jsdoc2md/jsdoc-to-markdown/issues/29#issuecomment-162350302). Hence the generated docs don't work anymore the way they did once. This needs to be fixed.
