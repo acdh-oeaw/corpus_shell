@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: virtual-keyboard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: virtual-keyboard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* 
+ * The MIT License
+ *
+ * Copyright 2016 OEAW/ACDH.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+!function($, params, URI, jquery_selection) {
+    var module = {};
+    module.virtualKeyboardProto;
+    module.failed = false;
+    module.keys = {}; // map
+    
+    if (jquery_selection === undefined || URI === undefined) {
+        module.failed = true;
+    } else {
+        $.ajax(params.templateLocation + "virtual-keyboard.tpl.html", {
+            async: false,
+            dataType: 'html',
+            error: function() {
+                module.failed = true;
+            },
+            success: function(unused, unused2, jqXHR) {
+                module.virtualKeyboardProto = $(jqXHR.responseText).find('#template');
+                module.failed = (module.virtualKeyboardProto.length === undefined ||
+                        module.virtualKeyboardProto.length !== 1);
+                module.virtualKeyboardProto.find('.remove-for-production').remove();
+                module.virtualKeyboardProto.removeAttr('id');
+            }
+        });
+    }
+    
+    /**
+     * Asynchroinously fetches an explain object to derive the keys for the context
+     * encoded in the uri given.
+     * 
+     * @param {uri} url A uri where a JSON object can be found that conforms to our explain objects interface.
+     * @param {type} whenDone A function to be called when the request finishes.
+     * @returns {undefined}
+     */
+    module.fetchKeys = function (url, whenDone) {
+        if (module.failed) return;
+        $.ajax(url, {
+            dataType: 'json',
+            error: function() {
+                module.keys = {};
+            },
+            success: function(unused, unused2, jqXHR) {
+                //does not work in jQuery 1.8.3, there was no reponseJSON
+                //var explain = jqXHR.responseJSON;
+                var explain = $.parseJSON(jqXHR.responseText);
+                if (explain.explain !== 'explain' ||
+                    explain.description === undefined ||
+                    explain.description.encoding === undefined ||
+                    explain.description.encoding.chars === undefined)
+                    return;
+                var query = URI.parseQuery(URI(url).query());
+                var keys = [];
+                for (var i in explain.description.encoding.chars) {
+                    keys.push(explain.description.encoding.chars[i]['Unicode']);
+                }
+                module.keys[query["x-context"]] = keys;
+            },
+            complete: function() {
+                whenDone();
+            }
+        });
+    };
+    
+    var keyClicked = function(event) {
+        var key = $(event.currentTarget);
+        var container = key.parent();
+        var input = $('#' + container.data('linked_input'));
+        // corner case input empty (weird selection semantics (!?)
+        if (input.val() === '') {
+            var text = key.text();
+            input.val(text);
+            //FF and IE _do not_ position the caret at the end of the text set!
+            input.selection('setPos', {start: text.length, end: text.length});
+        } else {
+            input.selection('replace', {text: key.text(), caret: 'end'});
+        }
+		if (input.hasClass('ui-autocomplete-input')) {
+			input.autocomplete("search");
+		}
+    };
+    
+    var hideKeyboardOnESC = function(e) {
+        if (e.which === 27) {
+            var checkbox = $(e.target).nextAll("input[type='checkbox']");
+            checkbox.prop("checked", false);
+        }
+    };
+    
+    /**
+     * 
+     * @param {string} context a default context used if no data-context is present.
+     * @returns {undefined}
+     */
+    module.attachKeyboards = function(defaultContext) {
+        if (module.failed) return;
+        var inputs = $(".virtual-keyboard-input");
+        inputs.on("keydown", hideKeyboardOnESC);
+        var defaultContext = defaultContext;
+        inputs.each(function(unused, element) {
+            var myInput = $(element);
+            var toggleCb = myInput.nextAll("input[type='checkbox']");
+            var toggleLabel = toggleCb.nextAll("label");
+            //sanity checks
+            var localContext = myInput.data("context");
+            if ((localContext === undefined || localContext === '') &amp;&amp; defaultContext !== undefined) {
+                localContext = defaultContext;
+                myInput.data('context', defaultContext);
+            }
+            var existingKeyboard = $(".virtual-keyboard-input#"+myInput.attr('id')+"~.virtual-keyboard");
+            if (existingKeyboard.size() > 0) {
+                if (existingKeyboard.data('context') !== localContext)
+                    existingKeyboard.remove();
+                else
+                    return;
+            }
+            if (localContext === undefined || 
+                module.keys[localContext] === undefined || 
+                module.keys[localContext].length === 0) {
+                toggleCb.hide();
+                toggleLabel.hide();
+                return;                
+            }
+            //create keyboard
+            var virtualKeyboard = module.virtualKeyboardProto.clone();
+            // data() stores in javascript not in DOM
+            virtualKeyboard.attr('data-context', localContext);
+            var virtualKeyboardKeyProto = virtualKeyboard.find(".key-prototype");
+            virtualKeyboardKeyProto.removeClass("key-prototype");
+            virtualKeyboardKeyProto.on("click", keyClicked);
+            var insertAfterElement = myInput;
+            if (toggleLabel.length === 1) {
+                toggleCb.show();
+                toggleLabel.show();
+                insertAfterElement = toggleLabel;
+                if (toggleLabel.hasClass("virtual-keyboard-first-three"))
+                   toggleLabel.text(module.keys[localContext][0] + module.keys[localContext][1] + module.keys[localContext][2]);
+            }
+            virtualKeyboard.insertAfter(insertAfterElement);
+            for (var i in module.keys[localContext]) {
+                var key = virtualKeyboardKeyProto.clone(true);
+                key.text(module.keys[localContext][i]);
+                virtualKeyboard.append(key);
+            }
+            virtualKeyboardKeyProto.remove();
+            virtualKeyboard.data('linked_input', myInput.attr('id'));
+        });
+    };
+    
+    // publish
+    this.VirtualKeyboard = module;
+}(window.jQuery, params, URI, window.jQuery.fn.selection);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-corpus_shell.html">corpus_shell</a></li></ul><h3>Classes</h3><ul><li><a href="-_anonymous_-module.QueryInput.html">QueryInput</a></li><li><a href="corpus_shell.BookReaderPanel.html">BookReaderPanel</a></li><li><a href="corpus_shell.MapPanel.html">MapPanel</a></li><li><a href="corpus_shell.PanelManager.html">PanelManager</a></li><li><a href="corpus_shell.ResourceManager.html">ResourceManager</a></li><li><a href="corpus_shell.XmlPanel.html">XmlPanel</a></li><li><a href="corupus_shell.Panel.html">Panel</a></li><li><a href="CQLConfig.html">CQLConfig</a></li></ul><h3>Events</h3><ul><li><a href="corpus_shell.PanelManager.html#event:onUpdated">onUpdated</a></li></ul><h3>Global</h3><ul><li><a href="global.html#doOnDocumentReady">doOnDocumentReady</a></li><li><a href="global.html#drawChart">drawChart</a></li><li><a href="global.html#json_encode">json_encode</a></li><li><a href="global.html#PanelController">PanelController</a></li><li><a href="global.html#ResourceController">ResourceController</a></li><li><a href="global.html#searchPanelCount">searchPanelCount</a></li><li><a href="global.html#sitesTitle">sitesTitle</a></li><li><a href="global.html#updating">updating</a></li><li><a href="global.html#userId">userId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jun 13 2016 14:12:02 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

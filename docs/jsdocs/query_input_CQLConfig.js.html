@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: query_input/CQLConfig.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: query_input/CQLConfig.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* 
+ * The MIT License
+ *
+ * Copyright 2016 OEAW/ACDH.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+/**
+ * @class CQLConfig
+ * "business" class, fetching and holding the information about available indexes and their values in SRU/CQL
+ * based on exactly one explain! 
+ * options: multiple params/fields, 
+ * indexes, different widgets
+ *
+ * dependencies: jQuery
+ 
+ * @author vronk
+ * @version 2013-04-11
+ *
+ * @param options explain_url, context_identifier
+*/
+
+function CQLConfig(options) {
+    var defaults = {"base_url": "fcs",  /* the _url will get this as first replace-pattern */
+                    "explain_url": "%s?operation=explain&amp;x-format=json",
+                    "scan_base_url": "%s?x-context=&amp;x-format=json&amp;operation=scan&amp;scanClause=%s&amp;sort=size&amp;maximumTerms=%d", /* call without pattern restriction (for initial call) */
+                    "scan_pattern_url": "%s?x-context=&amp;x-format=json&amp;operation=scan&amp;scanClause=%s=%s", /* placeholders will be replaced with index and (optional) pattern */
+                   "context": "",
+                   "values_limit": 200,
+                   "onLoaded": function(index) { console.log("loaded index: " + index) }
+                  };
+   
+       /** main variable holding all the settings for qi, especially also all params and their allowed values, and their current value
+      * it is constructed here by merging the default and the user options passed as parameter to .QueryInput()
+      */
+   var settings = $.extend(true, {}, defaults, options);
+
+    this.settings = settings;
+    this.onLoaded = this.settings.onLoaded;
+    this.loaded = 0; 
+    
+    this.context = "";
+    this.explain = {};
+    /** stores the list of indexes (this.explain.indexes) as an array */
+    this.indexes = [];
+    /** stores the values from scan for individual indexes */
+    this.values = {};
+    
+    
+    this.init = function() {
+        // console.log("cqlconfig.init");
+        if (!this.settings.hasOwnProperty("explain_url")) {
+            this.loaded = -1;
+            return null;
+        } else {
+            var me = this;
+            var explain_url = sprintf(this.settings.explain_url,this.settings.base_url).replace(/&amp;amp;/g,'&amp;');
+            $.getJSON(explain_url, function(data) {
+                    // console.log(data);
+                    me.explain = data;
+                    
+                    if (me.explain.hasOwnProperty("indexes")) {
+                        for (ix in me.explain.indexes) {
+           //                 console.log(ix);
+                            me.indexes.push(ix);
+                        }
+                    }
+                    me.loaded=1;
+                    me.onLoaded.call(me, "explain");
+              });
+        }
+      };
+     
+     /** return context sets */
+    this.getContextsets = function () {
+        if (this.explain.hasOwnProperty("context_sets")) {       
+            return this.explain.context_sets;
+         } else {
+            return null;
+         }
+    }
+    
+    this.getIndexes = function () {
+        if (this.indexes == []) {
+            return ["loading..."];
+        } else {
+            return this.indexes; 
+        }
+    };
+
+
+    this.getValues = function (index, pattern, response) {
+        var scan_url = sprintf(this.settings.scan_pattern_url,this.settings.base_url,index,pattern).replace(/&amp;amp;/g,'&amp;');
+        
+        var me = this;
+        /*
+        $.getJSON("http://api.rottentomatoes.com/api/public/v1.0/movies.json?callback=?", {
+				q: request.term,
+				page_limit: 10
+			}, function(data) {
+				// data is an array of objects and must be transformed for autocomplete to use
+				var array = data.error ? [] : $.map(data.movies, function(m) {
+					return {
+						label: m.title + " (" + m.year + ")",
+						url: m.links.alternate
+					};
+				});
+				response(array);
+			});
+			*/
+        $.getJSON(scan_url, function(data) {
+                         // console.log(data);
+    //                         me.values[index] = data;
+      //                 me.onLoaded.call(me, index);
+                    var array = data.error ? [] : data.terms
+                         response(array);
+                   });
+       return {"status":"loading"};
+    }
+
+    /*: read (and cache) the scan on demand
+        TODO: how to handle large indexes?
+        
+        nice idea (caching) , but did not get to work properly
+    */
+    this.getValues_withCache = function (index, pattern) {
+    
+        if (this.values[index]) {
+           
+           if (this.values[index].hasOwnProperty("terms")) {
+                // if full index loaded just work with that
+              if (this.values[index].indexSize == this.values[index].countReturned) {
+                    return  filter(this.values[index].terms,pattern);
+              } 
+           }
+           // if index but not terms i.e. => loading  - go load pattern
+           // but as it is obviously a big index (because still loading), only go for next call with at least two characters   
+           if (!this.values[index][pattern] &amp;&amp; pattern.length >= 2 )
+             { 
+             // else try to get a subset with pattern
+               var scan_url = sprintf(this.settings.scan_pattern_url,this.settings.base_url,index,pattern).replace(/&amp;amp;/g,'&amp;');
+                console.log("scan_pattern_url:" + scan_url);
+                this.values[index][pattern] = {"status":"loading"};
+                   var me = this;
+                 $.getJSON(scan_url, function(data) {
+                         // console.log(data);
+                         me.values[index][pattern] = data;
+                         
+                         me.onLoaded.call(me, index);
+                   });
+             }
+             
+             // return filtered result if available
+           if (this.values[index][pattern]) {
+           if (this.values[index][pattern].hasOwnProperty("terms")) {
+                   return  this.values[index][pattern].terms;
+              } else { 
+                    return this.values[index][pattern]; 
+              }
+           } else { // fallback return what we have
+               if (this.values[index].hasOwnProperty("terms")) {
+                        return this.values[index].terms;
+               }
+           } 
+             
+             
+        } else {
+          // only start loading if not called until now
+          this.values[index] = {"status":"loading"};
+          var me = this;
+          var scan_url = sprintf(this.settings.scan_base_url,this.settings.base_url,index,this.settings.values_limit).replace(/&amp;amp;/g,'&amp;');
+           console.log("scan_base_url:" + scan_url);
+            $.getJSON(scan_url, function(data) {
+                    console.log("DATA LOADED");
+                    me.values[index] = data;
+                    me.onLoaded.call(me, index);
+              });
+              // return status:loading
+          return {"status":"loading"};
+        } 
+       
+    };
+
+    function filter(array, term) {
+    //var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+    // console.log(array);
+    var matcher = new RegExp("^" + term, "i");
+    return $.grep(array, function (value) {
+        return matcher.test(value.label || value.value || value);
+    });
+};
+
+
+   this.init();
+    
+    
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-corpus_shell.html">corpus_shell</a></li></ul><h3>Classes</h3><ul><li><a href="-_anonymous_-module.QueryInput.html">QueryInput</a></li><li><a href="corpus_shell.BookReaderPanel.html">BookReaderPanel</a></li><li><a href="corpus_shell.MapPanel.html">MapPanel</a></li><li><a href="corpus_shell.PanelManager.html">PanelManager</a></li><li><a href="corpus_shell.ResourceManager.html">ResourceManager</a></li><li><a href="corpus_shell.XmlPanel.html">XmlPanel</a></li><li><a href="corupus_shell.Panel.html">Panel</a></li><li><a href="CQLConfig.html">CQLConfig</a></li></ul><h3>Events</h3><ul><li><a href="corpus_shell.PanelManager.html#event:onUpdated">onUpdated</a></li></ul><h3>Global</h3><ul><li><a href="global.html#doOnDocumentReady">doOnDocumentReady</a></li><li><a href="global.html#drawChart">drawChart</a></li><li><a href="global.html#json_encode">json_encode</a></li><li><a href="global.html#PanelController">PanelController</a></li><li><a href="global.html#ResourceController">ResourceController</a></li><li><a href="global.html#searchPanelCount">searchPanelCount</a></li><li><a href="global.html#sitesTitle">sitesTitle</a></li><li><a href="global.html#updating">updating</a></li><li><a href="global.html#userId">userId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jun 13 2016 14:12:02 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
