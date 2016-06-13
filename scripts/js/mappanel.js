@@ -22,16 +22,17 @@
  * THE SOFTWARE.
  */
 
-var MapPanel;
-
-!function ($, Panel, PanelController, params) {
+!function (exports, $, Panel, PanelController, params) {
 // Everything here assumes $ === jQuery so ensure this
 
 /**
  * A class for displaying geographical information in a panel
  * Inherits from Panel using prototype inheritance (see below)
+ * @constructor
+ * @memberOf! corpus_shell
+ * @extends Panel
  */
-MapPanel = function (id, type, title, url, position, pinned, zIndex, container, panelController, config) {
+var MapPanel = function (id, type, title, url, position, pinned, zIndex, container, panelController, config) {
     Panel.call(this, id, type, title, url, position, pinned, zIndex, container, panelController, config);
     this.Url = this.Url.replace("x-format=html", "x-format=json");
 
@@ -153,5 +154,6 @@ MapPanel = function (id, type, title, url, position, pinned, zIndex, container, 
 };
 
 MapPanel.prototype = new Panel();
+exports.MapPanel = MapPanel;
 
-}(jQuery, Panel, PanelController, params); // OpenLayers too, my be loaded by another module / drupal theme
+}(window, jQuery, Panel, PanelController, params); // OpenLayers too, my be loaded by another module / drupal theme

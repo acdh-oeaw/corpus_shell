@@ -26,7 +26,7 @@ function UserInput(obj)
 
 	this.nodes = new Array();
 	this.tokens = new Array();
-        this.offsets = new Array();
+ this.offsets = new Array();
 
 	this.cql = function () { return this.rootNode() ? this.rootNode().cql : ""; };
 	this.verbose = function (curpos) { return this.translateNode(this.rootNode(), 'verbose',curpos); };

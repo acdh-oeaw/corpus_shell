@@ -22,10 +22,13 @@
  * THE SOFTWARE.
  */
 
-!function ($, Panel) {
+!function (exports, $, Panel) {
 /**
- * A class for displaying XML data in a panel
+ * A class for displaying books from archive.org in a panel
  * Inherits from Panel using prototype inheritance (see below)
+ * @constructor
+ * @memberOf! corpus_shell
+ * @extends Panel
  */
 var BookReaderPanel = function (id, type, title, url, position, pinned, zIndex, container, panelController, config) {
     Panel.call(this, id, type, title, url, position, pinned, zIndex, container, panelController, config);
@@ -63,7 +66,7 @@ var BookReaderPanel = function (id, type, title, url, position, pinned, zIndex, 
     this.InitScrollPane = function() {
     };
     /**
-     * This method needs to pass the call to map's updateSize.
+     * This method is not needed by this type of panel.
      * @returns -
      */
     this.UpdateContentView = function() {
@@ -76,7 +79,7 @@ var BookReaderPanel = function (id, type, title, url, position, pinned, zIndex, 
 BookReaderPanel.prototype = new Panel();
 
 // publish
-this.BookReaderPanel = BookReaderPanel;
+exports.BookReaderPanel = BookReaderPanel;
 
-}(jQuery, Panel);
+}(window, jQuery, Panel);
 

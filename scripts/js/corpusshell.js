@@ -32,6 +32,8 @@
  * {@link module:corpus_shell~ShowIndexCache} which provides the Show/Hide indexes functionality.
  */
 
+(function (exports, $, PanelController, ResourceController, ProfileController, params, URI, HTMLOnDemandLoader, History) {
+    
 /**
  * @module corpus_shell 
  */
@@ -60,38 +62,43 @@ if (!Array.prototype.indexOf)
   };
 }
 
+
 /**
  * A protection variable to disable updates initiated by {@link module:corpus_shell~PanelManager#onUpdated} while
  * data is still retrieved from the server.
- * @type {boolean} 
+ * @type {boolean}
+ * @global 
  */
-var updating = false;
+exports.updating = false;
 
 /**
  * The current user ID.
- * @type {string}  
+ * @type {string}
+ * @global  
  */
-var userId = null;
+exports.userId = null;
 /**
  * Current count of search panels.
- * @type {number} 
+ * @type {number}
+ * @global 
  */
-var searchPanelCount = 1;
-var Indexes = null;
+exports.searchPanelCount = 1;
+exports.Indexes = null;
 
 /**
- * 
- * @type {string} A title that is to be displayed on the Tab of the browser.
+ * A title that is to be displayed on the Tab of the browser.
+ * @type {string}
+ * @global
  */
 
-var sitesTitle;
+exports.sitesTitle;
 
-function split( val )
+exports.split = function( val )
 {
   return val.split( /=\s*/ );
 }
 
-function extractLast( term )
+exports.extractLast = function( term )
 {
   return split( term ).pop();
 }
@@ -101,8 +108,9 @@ function extractLast( term )
  * @desc Provides a recursive algorithm to construct the json code needed to represent a hierarchical object structure.<br/>
  * The actual recursive function is called _json_encode.
  * @return {string} JSON string representing the object hierarchy.
+ * @global
  */
-function json_encode(inVal)
+exports.json_encode = function(inVal)
 {
   return _json_encode(inVal).join('');
 }
@@ -199,9 +207,6 @@ function _json_encode(inVal, out)
     }
 }
 
-// Everything here assumes $ === jQuery so ensure this
-(function ($, PanelController, ResourceController, ProfileController, params, URI, HTMLOnDemandLoader) {
-
 /**
  * @summary Get parameters from the supplied uri/url
  * @desc Returns them as a "map" (a JavaScript object which properties correspond to the parameters).
@@ -235,6 +240,7 @@ function GetUrlParams(url)
 
 /**
  * @summary Initialization for the corpus_shell app. Run on $(document).ready().
+ * @global
  * @desc
  * <ol>
  * <li>Bind events to DOM elements that do exist when the document is loaded, that is everything belonging to the side bar.</li>
@@ -386,8 +392,8 @@ function doOnDocumentReady ()
       var pos = sender.position();
       console.info('Pos: ' + pos.left + ' ' + pos.top);
     });
-    if (sitesTitle === undefined)
-        sitesTitle = document.title;
+    if (exports.sitesTitle === undefined)
+        exports.sitesTitle = document.title;
     var urlParams = GetUrlParams(location.search);
     GetUserId(urlParams, function() {
     // the $(document).ready callback returns here. The following code is executed after a delay that depends on how userId is fetched and
@@ -591,8 +597,9 @@ function LoadIndexCache(onComplete, onError) {
 }
 
 /**
- * @type {link} A manipulates a special link that could be used to save the url with
+ * A manipulates a special link that could be used to save the url with
  * the userid for later use.
+ * @type {link}
  */
 var originalShareLink;
 
@@ -636,7 +643,7 @@ function SaveUserData(userid)
       {
         // li.share a is for drupal/gratis. How to do this without drupal?
         function errorHandler() {
-            History.replaceState(null, sitesTitle,"?userId=");
+            History.replaceState(null, exports.sitesTitle,"?userId=");
             if (originalShareLink !== undefined) {
                 $("li.share a").attr("href", originalShareLink);
             }
@@ -653,7 +660,7 @@ function SaveUserData(userid)
         if (jqXHR.status === 200 && textStatus === "success") {
             var msg = $(jqXHR.responseXML).find("msg").text();
             if (msg === "ok") {
-                History.replaceState(null, sitesTitle, "?userId=" + encodeURIComponent(userid));
+                History.replaceState(null, exports.sitesTitle, "?userId=" + encodeURIComponent(userid));
                 if (originalShareLink === undefined)
                     originalShareLink = shareLink.attr("href");
                 $("li.share a").attr("href", "?userId=" + encodeURIComponent(userid));
@@ -670,7 +677,7 @@ function SaveUserData(userid)
 }
 
 /**
- * Provides the functionality for openning and closing the side bar.Changes the arrow shown. 
+ * Provides the functionality for openning and closing the side bar.Changes the arrow shown.
  */
 function ToggleSideBar()
 {
@@ -1033,7 +1040,8 @@ function GetIndexesFromSearchCombo()
 }
 
 /**
- * Provides the Show/Hide indexes functionality. The actual list is provided
+ * @memberof! corpus_shell
+ * @desc Provides the Show/Hide indexes functionality. The actual list is provided
  * as an HTML snippet by {@link corpus_shell~ResourceManager#GetIndexCache}. 
  */
 function ShowIndexCache()
@@ -1076,4 +1084,4 @@ function ShowIndexCache()
   $('#openIndexList td.dottedr').css('text-align', 'right');
 }
 
-})(jQuery, PanelController, ResourceController, ProfileController, params, URI, HTMLOnDemandLoader);
+})(window, jQuery, PanelController, ResourceController, ProfileController, params, URI, HTMLOnDemandLoader, History);

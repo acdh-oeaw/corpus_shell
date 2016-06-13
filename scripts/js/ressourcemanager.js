@@ -33,15 +33,17 @@
  * @module corpus_shell 
  */
 
+(function (exports, $) {
+
 /**
  * The ResourceController object, an {@link module:corpus_shell~ResourceManager} instance.
+ * @global
  */
-var ResourceController;
-// Everything here assumes $ === jQuery so ensure this
-(function ($) {
+exports.ResourceController;
 
 /**
  * @classdesc Manages resources that is search endpoints and their possible inexes.
+ * @memberof! corpus_shell
  * @constructor 
  */
 function ResourceManager()
@@ -224,7 +226,7 @@ function ResourceManager()
         delete resource.Indexes[key];
       }
 
-      delete resource;
+      delete this.Resources[reskey];
     }
   }
 
@@ -276,5 +278,5 @@ function ResourceManager()
     return hStr + '</table></div>';
   }
 }
-ResourceController = new ResourceManager();
-})(jQuery);
+exports.ResourceController = new ResourceManager();
+})(window, jQuery);
