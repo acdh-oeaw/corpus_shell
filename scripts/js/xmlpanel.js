@@ -22,16 +22,17 @@
  * THE SOFTWARE.
  */
 
-var XmlPanel;
-
 // Everything here assumes $ === jQuery so ensure this
-(function ($, Panel, ace) {
+(function (exports, $, Panel, ace) {
 
 /**
  * A class for displaying XML data in a panel
  * Inherits from Panel using prototype inheritance (see below)
+ * @constructor
+ * @memberOf! corpus_shell
+ * @extends Panel
  */
-XmlPanel = function (id, type, title, url, position, pinned, zIndex, container, panelController, config) {
+var XmlPanel = function (id, type, title, url, position, pinned, zIndex, container, panelController, config) {
     Panel.call(this, id, type, title, url, position, pinned, zIndex, container, panelController, config);
     this.Url = encodeURI(this.Url.replace("x-format=html", "x-format=xml"));
 
@@ -79,7 +80,7 @@ XmlPanel = function (id, type, title, url, position, pinned, zIndex, container, 
     this.InitScrollPane = function() {
     };
     /**
-     * This method needs to pass the call to map's updateSize.
+     * This method needs to pass the call to ace editor's resize.
      * @returns -
      */
     this.UpdateContentView = function() {
@@ -89,6 +90,7 @@ XmlPanel = function (id, type, title, url, position, pinned, zIndex, container, 
 }
 
 XmlPanel.prototype = new Panel();
+exports.XmlPanel = XmlPanel;
 
-})(jQuery, Panel, ace);
+})(window, jQuery, Panel, ace);
 

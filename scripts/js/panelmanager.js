@@ -33,6 +33,8 @@
  * 
  */
 
+!function (exports, $, SearchConfig, params) {
+
 /**
  * @module corpus_shell 
  */
@@ -40,14 +42,13 @@
 /**
  * The controller object managing all the panels. Currently the target for
  * its operation is an id selector of #snaptarget
+ * @global
  */ 
-var PanelController;
-// Everything here assumes $ === jQuery so ensure this
-!function ($, SearchConfig, params) {
-
+exports.PanelController;
 /**
  * Creates a PanelManager.
  * @constructor
+ * @memberOf! corpus_shell
  * @param container {string} A jQuery selector which selects the part of the page
  *                           the panels appear in.
  * @param searchConfig {array.<SearchConfigItem>} An array of x-context, DisplayText maps -> {@link module:corpus_shell~SearchConfig}
@@ -1629,5 +1630,5 @@ var PanelManager = function (container, searchConfig)
         }
   };
 }
-this.PanelController = new PanelManager("#snaptarget", SearchConfig);
-}(jQuery, SearchConfig, params);
+exports.PanelController = new PanelManager("#snaptarget", SearchConfig);
+}(window, jQuery, SearchConfig, params);

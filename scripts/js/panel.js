@@ -41,7 +41,12 @@
  */
 
 // Everything here assumes $ === jQuery so ensure this
-!function ($, params, PanelController, ResourceController, VirtualKeyboard, document) {
+!function (exports, $, params, PanelController, ResourceController, VirtualKeyboard, document) {
+
+/**
+ * @module corpus_shell
+ */
+
 // fetchKeys? wait? when? where?
     VirtualKeyboard.keys = {
         "arz_eng_006": ["ʔ", "ā", "ḅ", "ʕ", "ḍ", "ḏ", "ē", "ġ", "ǧ", "ḥ", "ī", "ᴵ", "ḷ", "ṃ", "ō", "ṛ", "ṣ", "š", "ṭ", "ṯ", "ū", "ẓ", "ž"],
@@ -55,6 +60,8 @@
 /**
  * Creates a panel in corpus_shell.
  * @constructor
+ * @name Panel
+ * @memberOf! corupus_shell
  * @param {string} id The unique id of this panel. Is a valid JavaScript objects property name.
  * @param {string} type The type of this panel (currently known: search, image, )
  * @param {string} title The intelligable title presented to the user. 
@@ -1091,5 +1098,5 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
     }
     
     // publish
-    this.Panel = module;
-}(jQuery, params, PanelController, ResourceController, VirtualKeyboard, document);
+    exports.Panel = module;
+}(window, jQuery, params, PanelController, ResourceController, VirtualKeyboard, document);
