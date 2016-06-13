@@ -44,6 +44,8 @@ Simple answer
     some of it's behaviour to your needs by adapting the JavaScript, CSS and perhaps HTML parts: There is nothing to do
     but open index.html right from where you downloaded it. All your settings stay local in your browser and you query
     the publicly available projects at ACDH's server.
+    This is also what the gh-pages branch of this repository contains hence you can see a `demo of the interface here <https://acdh-oeaw.github.io/corpus_shell/>`_.
+    There is also `source code documentation for this HTML5 part of corpus_shell <https://acdh-oeaw.github.io/corpus_shell/docs>`_ available there.
     
 Advanced answer
 	If you want to expose your own data to the world then it gets way more complicated. You need a server capable of interpreting
