@@ -1,4 +1,32 @@
-/* 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: panelmanager.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: panelmanager.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* 
  * The MIT License
  *
  * Copyright 2016 OEAW/ACDH.
@@ -23,11 +51,11 @@
  */
 
 /**
- * @fileOverview Provides tha PanelManager class and the global PanelController object. <br/>
- * Entry point from index.html is {@link module:corpus_shell~PanelManager#OpenNewSearchPanel} <br/>
+ * @fileOverview Provides tha PanelManager class and the global PanelController object. &lt;br/>
+ * Entry point from index.html is {@link module:corpus_shell~PanelManager#OpenNewSearchPanel} &lt;br/>
  * Entry point from corpusshell.js is {@link module:corpus_shell~PanelManager#OpenSubPanel} which
- * is automatically attached to a set of links to replace their default behaviour. See {@link module:corpus_shell~doOnDocumentReady}<br/>
- * Currently the target of all operations is the id selector of "#snaptarget" -> {@link module:corpus_shell~PanelController}</br>
+ * is automatically attached to a set of links to replace their default behaviour. See {@link module:corpus_shell~doOnDocumentReady}&lt;br/>
+ * Currently the target of all operations is the id selector of "#snaptarget" -> {@link module:corpus_shell~PanelController}&lt;/br>
  * last change:  2012.10.02
  * @author      Andy Basch
  * 
@@ -51,7 +79,7 @@ exports.PanelController;
  * @memberOf! corpus_shell
  * @param container {string} A jQuery selector which selects the part of the page
  *                           the panels appear in.
- * @param searchConfig {array.<SearchConfigItem>} An array of x-context, DisplayText maps -> {@link module:corpus_shell~SearchConfig}
+ * @param searchConfig {array.&lt;SearchConfigItem>} An array of x-context, DisplayText maps -> {@link module:corpus_shell~SearchConfig}
  * @classdesc purpose:      handles the panel management in corpus_shell
  *
  * @requires corpus_shell~Panel
@@ -68,13 +96,13 @@ var PanelManager = function (container, searchConfig)
   this.Container = container;
   /** 
    * @public
-   * @type {array.<SearchConfigItem>}
+   * @type {array.&lt;SearchConfigItem>}
    */
   this.SearchConfig = searchConfig;
 
   /**
    * @protected
-   * @type {map.<MainPanelObject>} 
+   * @type {map.&lt;MainPanelObject>} 
    * @desc A "map" (that is an object with ever extending dynamic properties) of parent/main panels created accessible by their unique id.
    */
   this.Panels = [];
@@ -82,19 +110,19 @@ var PanelManager = function (container, searchConfig)
   this.ProfileName = "default";
   /** 
    * @protected
-   * @type {array.<string>}
+   * @type {array.&lt;string>}
    * @desc Array of all panel ids currently in use.
    */
   this.UsedPanels = [];
   /**
    * @protected
-   * @type {array.<string>}
+   * @type {array.&lt;string>}
    * @desc array of all search panel titles currently in use. 
    */
   this.UsedSearchPanelTitles = [];
   /** 
    * @protected
-   * @type {map.<module:corpus_shell~Panel>}
+   * @type {map.&lt;module:corpus_shell~Panel>}
    * @desc A "map" (that is an object with ever extending dynamic properties) of panels accessible by their unique id.
    */
   this.PanelObjects = [];
@@ -125,12 +153,12 @@ var PanelManager = function (container, searchConfig)
    * @param {string} title The intelligable title of the main panel.
    * @param {number} zIndex The height of the main panel object to be added.
    * @desc
-   * <ol>
-   * <li>Creates a new {@link MainPanelObject} using the given parameters. -> {@link module:corpus_shell~PanelManager#GetNewMainPanelObject}</li>
-   * <li>Add this panel to the "map" of main panels. -> {@link module:corpus_shell~PanelManager#Panels}</li>
-   * <li>Add the panel id to the list of currently used panels (panel ids). -> {@link module:corpus_shell~PanelManager#AddPanelId}</li>
-   * <li>Add the panel title to the list of currently used search panel titles. -> {@link module:corpus_shell~PanelManager#AddSearchPanelTitle}</li>
-   * </ol>
+   * &lt;ol>
+   * &lt;li>Creates a new {@link MainPanelObject} using the given parameters. -> {@link module:corpus_shell~PanelManager#GetNewMainPanelObject}&lt;/li>
+   * &lt;li>Add this panel to the "map" of main panels. -> {@link module:corpus_shell~PanelManager#Panels}&lt;/li>
+   * &lt;li>Add the panel id to the list of currently used panels (panel ids). -> {@link module:corpus_shell~PanelManager#AddPanelId}&lt;/li>
+   * &lt;li>Add the panel title to the list of currently used search panel titles. -> {@link module:corpus_shell~PanelManager#AddSearchPanelTitle}&lt;/li>
+   * &lt;/ol>
    * @summary purpose:    adds a parent/main panel to the list of panels.
    * @fires module:corpus_shell~PanelManager#event:onUpdated
    * @return    -
@@ -200,7 +228,7 @@ var PanelManager = function (container, searchConfig)
     else
       parent = this.GetMainPanel(parentId);
 
-    if (parent !== undefined && parent !== null)
+    if (parent !== undefined &amp;&amp; parent !== null)
     {
       parent.Panels[panelId] = this.GetNewPanelObject(panelId, type, pinned, position, url, title, zIndex);
       this.AddPanelId(panelId);
@@ -373,7 +401,7 @@ var PanelManager = function (container, searchConfig)
 
     for (var key in main.Panels)
     {
-      if (main.Panels[key] != undefined && main.Panels[key].Type == type && main.Panels[key].Pinned == true)
+      if (main.Panels[key] != undefined &amp;&amp; main.Panels[key].Type == type &amp;&amp; main.Panels[key].Pinned == true)
         return main.Panels[key];
     }
 
@@ -399,7 +427,7 @@ var PanelManager = function (container, searchConfig)
 
     for (var key in main.Panels)
     {
-      if (main.Panels[key] != undefined && main.Panels[key].Type == type && main.Panels[key].Pinned == true)
+      if (main.Panels[key] != undefined &amp;&amp; main.Panels[key].Type == type &amp;&amp; main.Panels[key].Pinned == true)
         return key;
     }
 
@@ -520,7 +548,7 @@ var PanelManager = function (container, searchConfig)
   {
     var panel = this.GetSubPanel("", panelId);
 
-    if (panel != null && panel.Pinned != pinned)
+    if (panel != null &amp;&amp; panel.Pinned != pinned)
     {
       panel.Pinned = pinned;
       this.TriggerChangedEvent("Panel pinned state changed: " + panelId);
@@ -538,7 +566,7 @@ var PanelManager = function (container, searchConfig)
     
     if (panel.Maximized) {return;}
     
-    if (panel !== null && 
+    if (panel !== null &amp;&amp; 
         (panel.Position.Top !== position.Top ||
         panel.Position.Left !== position.Left ||
         panel.Position.Width !== position.Width ||
@@ -560,7 +588,7 @@ var PanelManager = function (container, searchConfig)
   {
     var panel = this.GetPanel(panelId);
 
-    if (panel != null && panel.Url != url)
+    if (panel != null &amp;&amp; panel.Url != url)
     {
       panel.Url = url;
       this.TriggerChangedEvent("Panel url changed: " + panelId);
@@ -576,7 +604,7 @@ var PanelManager = function (container, searchConfig)
   {
     var panel = this.GetPanel(panelId);
 
-    if (panel !== null && panel.ZIndex !== zIndex)
+    if (panel !== null &amp;&amp; panel.ZIndex !== zIndex)
     {
       panel.ZIndex = zIndex;
 
@@ -614,7 +642,7 @@ var PanelManager = function (container, searchConfig)
     {
       for (var key in this.Panels)
       {
-        if (this.Panels[key] != undefined && this.Panels[key].Panels[panelId] != undefined)
+        if (this.Panels[key] != undefined &amp;&amp; this.Panels[key].Panels[panelId] != undefined)
         {
           delete this.RemoveSubPanel(key, panelId);
           break;
@@ -683,7 +711,7 @@ var PanelManager = function (container, searchConfig)
    * @property {string} Title The title of the panel.
    * @property {string} Type The type of this panel.
    * @property {Position} Position The position of this panel
-   * @property {array.<SubPanelObject>} Panels  All the sub panels within this panel.
+   * @property {array.&lt;SubPanelObject>} Panels  All the sub panels within this panel.
    * @property {url} Url A URL describing ???
    * @property {number} ZIndex At which "heigh" this panel is on screen.
    */
@@ -746,8 +774,8 @@ var PanelManager = function (container, searchConfig)
 
   /**
   * @private
-  * @desc purpose: Generate unique panel ids. <br/>
-  * <em>Note: These have to be valid ids for an HTML element and JavaScript objects property names!</em>
+  * @desc purpose: Generate unique panel ids. &lt;br/>
+  * &lt;em>Note: These have to be valid ids for an HTML element and JavaScript objects property names!&lt;/em>
   * @return {string} A dynamically generated unique panel id (that is panel + the next unused number = eg. panel815).
   */
   this.GetNewPanelId = function()
@@ -870,13 +898,13 @@ var PanelManager = function (container, searchConfig)
   
   /**
    * Datastructure holding the panels registerd by {@link module:corpus_shell~PanelManager#EnsureSearchPanelOpened}.
-   * @type {array.<PanelDescription>}
+   * @type {array.&lt;PanelDescription>}
    */
   this.EnsuredPanels = [];
   /**
    * Ensures that a search panel for this resource will be visible when the initialization is finished.
    * @public
-   * @param {number|string} config The index of the {@link module:corpus_shell~SearchConfig} to use or <br/>
+   * @param {number|string} config The index of the {@link module:corpus_shell~SearchConfig} to use or &lt;br/>
    *                        may be an internal resource name.
    * @param {string} [searchstr] The search string to execute in the new panel.
    */
@@ -979,7 +1007,7 @@ var PanelManager = function (container, searchConfig)
     {
       var maxZidx = this.GetMaxZIndex();
       var curZidx = panelObj.ZIndex;
-      var newZidx = curZidx < maxZidx ? maxZidx + 2 : curZidx;
+      var newZidx = curZidx &lt; maxZidx ? maxZidx + 2 : curZidx;
       panelObj.Maximize(position, newZidx);
       panel.ZIndex = newZidx;
       this.maximizedPanel = panelObj.Id;
@@ -1001,14 +1029,14 @@ var PanelManager = function (container, searchConfig)
       var panel = this.Panels[key];
 
       var zIdx1 = parseInt(panel.ZIndex);
-      if (zIdx1 < minZidx)
+      if (zIdx1 &lt; minZidx)
         minZidx = zIdx1;
 
       for (var subKey in panel.Panels)
       {
         var subPanel = panel.Panels[subKey];
         var zIdx2 = parseInt(subPanel.ZIndex);
-        if (zIdx2 < minZidx)
+        if (zIdx2 &lt; minZidx)
           minZidx = zIdx2;
       }
     }
@@ -1090,7 +1118,7 @@ var PanelManager = function (container, searchConfig)
     var curMaxZidx = this.GetMaxZIndex();
     var panelObj = this.GetPanelObj(panelId);
 
-    if (panelObj !== undefined && panelObj.ZIndex < curMaxZidx) {    
+    if (panelObj !== undefined &amp;&amp; panelObj.ZIndex &lt; curMaxZidx) {    
         var maxZidx = curMaxZidx + 2;
         this.SetPanelZIndex(panelId, maxZidx);
         panelObj.SetZIndex(maxZidx);
@@ -1114,26 +1142,26 @@ var PanelManager = function (container, searchConfig)
   
   /**
    * @public
-   * @param {number|string} config The index of the {@link module:corpus_shell~SearchConfig} to use or <br/>
+   * @param {number|string} config The index of the {@link module:corpus_shell~SearchConfig} to use or &lt;br/>
    *                        may be an internal resource name.
-   * @param {string} [searchstr] The search string to execute in the new panel. <br/>
+   * @param {string} [searchstr] The search string to execute in the new panel. &lt;br/>
    *                             This may be an incomplete statement e.g. if this is called from
    *                             HTML generated by {@link module:corpus_shell~ResourceManager#GetIndexCache}
    * @param {string} [dataview] A comma separated list of dataviews to request from the switch. Most useful: "full".
    * @desc
-   * <ol> 
-   * <li>Fetches the next unique panel id -> {@link module:corpus_shell~PanelManager#GetNewPanelId}. </li>
-   * <li>Calculates an initial position as a {@link Position} object. <br/>
-   *     It uses a cascading effect {@link module:corpus_shell~PanelManager#GetPanelCount} and by default an initial size of 525px x 600px. </li>
-   * <li>Places the new window above all currently visible. -> {@link module:corpus_shell~PanelManager#GetMaxZIndex}</li>
-   * <li>Creates a new title for the panel using "Search" as a part of that title. -> {@link module:corpus_shell~PanelManager#GetNewPanelTitle}</li>
-   * <li>Converts the internal name to an index if necessary -> {@link module:corpus_shell~PanelManager#GetSearchIdx}.</li>
-   * <li>Creates a new {@link module:corpus_shell~Panel} object.</li>
-   * <li>Within this new panel create a new search panel and display it using {@link module:corpus_shell~Panel#CreatePanel}
-   * <li>Add the new panel to this object's "map" of all panels by its unique id. -> {@link module:corpus_shell~PanelManager#PanelObjects}</li>
-   * <li>Create a new main panel object for this panel in the map of main panel objects which is one above the created panel -> {@link module:corpus_shell~PanelManager#AddMainPanel}</li>
-   * </ol>
-   * Note: Do not call this from an arbitrary jQuery ready handler! The initialization is most probably not finished and the newly created panel will just vanish.<br/>
+   * &lt;ol> 
+   * &lt;li>Fetches the next unique panel id -> {@link module:corpus_shell~PanelManager#GetNewPanelId}. &lt;/li>
+   * &lt;li>Calculates an initial position as a {@link Position} object. &lt;br/>
+   *     It uses a cascading effect {@link module:corpus_shell~PanelManager#GetPanelCount} and by default an initial size of 525px x 600px. &lt;/li>
+   * &lt;li>Places the new window above all currently visible. -> {@link module:corpus_shell~PanelManager#GetMaxZIndex}&lt;/li>
+   * &lt;li>Creates a new title for the panel using "Search" as a part of that title. -> {@link module:corpus_shell~PanelManager#GetNewPanelTitle}&lt;/li>
+   * &lt;li>Converts the internal name to an index if necessary -> {@link module:corpus_shell~PanelManager#GetSearchIdx}.&lt;/li>
+   * &lt;li>Creates a new {@link module:corpus_shell~Panel} object.&lt;/li>
+   * &lt;li>Within this new panel create a new search panel and display it using {@link module:corpus_shell~Panel#CreatePanel}
+   * &lt;li>Add the new panel to this object's "map" of all panels by its unique id. -> {@link module:corpus_shell~PanelManager#PanelObjects}&lt;/li>
+   * &lt;li>Create a new main panel object for this panel in the map of main panel objects which is one above the created panel -> {@link module:corpus_shell~PanelManager#AddMainPanel}&lt;/li>
+   * &lt;/ol>
+   * Note: Do not call this from an arbitrary jQuery ready handler! The initialization is most probably not finished and the newly created panel will just vanish.&lt;br/>
    * @summary purpose: Creates a new search panel and registers it with this object.
    * @fires module:corpus_shell~PanelManager#event:onUpdated
    * @return {string} The ID of the newly created Search Panel
@@ -1165,19 +1193,19 @@ var PanelManager = function (container, searchConfig)
   /**
    * @public
    * @param {string} An internal resource name.
-   * @param {string} [scanIdx] The index string for which the possible terms should be fetched. <br/>
+   * @param {string} [scanIdx] The index string for which the possible terms should be fetched. &lt;br/>
    * @desc
-   * <ol>
-   *    <li>Create a URL that fetches a scan view of the specified index
-   *        for the specified resource from {@link module:corpus_shell~switchURL}.</li>
-   *    <li>Open a new content panel with to show this URL.</li>
-   * </ol>
+   * &lt;ol>
+   *    &lt;li>Create a URL that fetches a scan view of the specified index
+   *        for the specified resource from {@link module:corpus_shell~switchURL}.&lt;/li>
+   *    &lt;li>Open a new content panel with to show this URL.&lt;/li>
+   * &lt;/ol>
    * @return    -
    */
   this.OpenNewScanPanel = function(config, scanIdx)
   {
-    var urlStr = switchURL + "?operation=scan&x-format=html&x-context=" + config +
-                 "&version=1.2&scanClause=" + scanIdx;
+    var urlStr = switchURL + "?operation=scan&amp;x-format=html&amp;x-context=" + config +
+                 "&amp;version=1.2&amp;scanClause=" + scanIdx;
     if (scanIdx === 'geo') {
         this.OpenNewContentPanel(urlStr, "Map " + config + ": " + scanIdx);
     } else {
@@ -1421,7 +1449,7 @@ var PanelManager = function (container, searchConfig)
   /**
   * @param {string} panelId - unique panel identifier
   * @param {boolean} [resetPaging] Wheter to set the start record for the result set to 1.
-  * @desc purpose: Store the search urls for all the searches started using the panels <br/>
+  * @desc purpose: Store the search urls for all the searches started using the panels &lt;br/>
   * after executing them there. -> {@link module:corpus_shell~Panel#StartSearch}
   * @fires module:corpus_shell~PanelManager#event:onUpdated
   * @return    -
@@ -1461,8 +1489,8 @@ var PanelManager = function (container, searchConfig)
       var start = parseInt($('#' + panelId).find('.startrecord').val());
       var max = parseInt($('#' + panelId).find('.maxrecord').val());
 
-      if (!max || max <= 0) max = panel.DefaultMaxRecords;
-      if (!start || start < 1) start = panel.DefaultStartRecord;
+      if (!max || max &lt;= 0) max = panel.DefaultMaxRecords;
+      if (!start || start &lt; 1) start = panel.DefaultStartRecord;
 
       if (start - max > 0)
         start = start - max;
@@ -1486,12 +1514,12 @@ var PanelManager = function (container, searchConfig)
       var start = parseInt($('#' + panelId).find('.startrecord').val());
       var max = parseInt($('#' + panelId).find('.maxrecord').val());
 
-      if (!max || max <= 0) max = panel.DefaultMaxRecords;
-      if (!start || start < 1) start = panel.DefaultStartRecord;
+      if (!max || max &lt;= 0) max = panel.DefaultMaxRecords;
+      if (!start || start &lt; 1) start = panel.DefaultStartRecord;
 
       var hitCount = parseInt($('#' + panelId).find('.hitcount').html());
 
-      if (hitCount && start + max <= hitCount)
+      if (hitCount &amp;&amp; start + max &lt;= hitCount)
         start = start + max;
 
       var url = panel.StartSearch(start, max);
@@ -1509,7 +1537,7 @@ var PanelManager = function (container, searchConfig)
   */
   this.GetSearchIdx = function(xContext)
   {
-    for (var idx = 0; idx < this.SearchConfig.length; idx++)
+    for (var idx = 0; idx &lt; this.SearchConfig.length; idx++)
     {
       if (this.SearchConfig[idx]['x-context'] === xContext)
         return idx;
@@ -1555,7 +1583,7 @@ var PanelManager = function (container, searchConfig)
         var found = false;
         var configIdx = this.GetSearchIdx(panelDescription.config);
         for (var pkey in this.PanelObjects) {
-            found = this.PanelObjects[pkey].Config === configIdx &&
+            found = this.PanelObjects[pkey].Config === configIdx &amp;&amp;
                     this.PanelObjects[pkey].Type === panelDescription.panelType;
             if (!found)
                 continue;
@@ -1588,7 +1616,7 @@ var PanelManager = function (container, searchConfig)
       {
         panel['Type'] = "search";
         this.CreateNewSearchPanelObj(panel);
-        if (panel.Url !== undefined && panel.Url !== "")
+        if (panel.Url !== undefined &amp;&amp; panel.Url !== "")
         {
           var panelObj = this.GetPanelObj(panel.Id);
           if (panelObj !== undefined)
@@ -1614,16 +1642,16 @@ var PanelManager = function (container, searchConfig)
                 var ID = this.OpenNewSearchPanel(this.EnsuredPanels[key].config, this.EnsuredPanels[key].searchStr);
                 this.StartSearch(ID);
             } else if (this.EnsuredPanels[key].panelType === "explain") {
-                this.OpenNewContentPanel(params.switchURL + '?x-format=html&version=1.2&x-context=' + this.EnsuredPanels[key].config +
-                   '&operation=explain');
+                this.OpenNewContentPanel(params.switchURL + '?x-format=html&amp;version=1.2&amp;x-context=' + this.EnsuredPanels[key].config +
+                   '&amp;operation=explain');
             } else {
                 if (this.EnsuredPanels[key].searchStr !== 'geo') {
-                this.OpenNewContentPanel(params.switchURL + '?x-format=html&version=1.2&x-context=' + this.EnsuredPanels[key].config +
-                   '&operation=scan&scanClause=' + this.EnsuredPanels[key].searchStr);
+                this.OpenNewContentPanel(params.switchURL + '?x-format=html&amp;version=1.2&amp;x-context=' + this.EnsuredPanels[key].config +
+                   '&amp;operation=scan&amp;scanClause=' + this.EnsuredPanels[key].searchStr);
                 }
                 else {
-                    this.OpenNewContentPanel(params.switchURL + '?x-format=html&version=1.2&x-context=' + this.EnsuredPanels[key].config +
-                   '&operation=scan&scanClause=' + this.EnsuredPanels[key].searchStr,
+                    this.OpenNewContentPanel(params.switchURL + '?x-format=html&amp;version=1.2&amp;x-context=' + this.EnsuredPanels[key].config +
+                   '&amp;operation=scan&amp;scanClause=' + this.EnsuredPanels[key].searchStr,
                    "Map " + this.EnsuredPanels[key].config + ": " + this.EnsuredPanels[key].searchStr);
                 }
             }
@@ -1632,3 +1660,26 @@ var PanelManager = function (container, searchConfig)
 }
 exports.PanelController = new PanelManager("#snaptarget", SearchConfig);
 }(window, jQuery, SearchConfig, params);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-corpus_shell.html">corpus_shell</a></li></ul><h3>Classes</h3><ul><li><a href="-_anonymous_-module.QueryInput.html">QueryInput</a></li><li><a href="corpus_shell.BookReaderPanel.html">BookReaderPanel</a></li><li><a href="corpus_shell.MapPanel.html">MapPanel</a></li><li><a href="corpus_shell.PanelManager.html">PanelManager</a></li><li><a href="corpus_shell.ResourceManager.html">ResourceManager</a></li><li><a href="corpus_shell.XmlPanel.html">XmlPanel</a></li><li><a href="corupus_shell.Panel.html">Panel</a></li><li><a href="CQLConfig.html">CQLConfig</a></li></ul><h3>Events</h3><ul><li><a href="corpus_shell.PanelManager.html#event:onUpdated">onUpdated</a></li></ul><h3>Global</h3><ul><li><a href="global.html#doOnDocumentReady">doOnDocumentReady</a></li><li><a href="global.html#drawChart">drawChart</a></li><li><a href="global.html#json_encode">json_encode</a></li><li><a href="global.html#PanelController">PanelController</a></li><li><a href="global.html#ResourceController">ResourceController</a></li><li><a href="global.html#searchPanelCount">searchPanelCount</a></li><li><a href="global.html#sitesTitle">sitesTitle</a></li><li><a href="global.html#updating">updating</a></li><li><a href="global.html#userId">userId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 10 2017 13:04:47 GMT+0100 (Mitteleuropäische Zeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

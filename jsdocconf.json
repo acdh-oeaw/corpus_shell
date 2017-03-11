@@ -1,0 +1,3 @@
+{
+    "plugins": [ "../jsdoc-plugin-strip-outer-iife/strip-outer-iife.js" ]
+}

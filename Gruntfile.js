@@ -19,10 +19,21 @@ module.exports = function(grunt) {
                   './scripts/js/query_input/cql_parser.js': ['./node_modules/jscc-node/jscc.js']  
                 }
             }
+        },        
+        jsdoc : {
+            dist : {
+                src: ['scripts/js/*.js', 'scripts/js/query_input/*.js'],
+                options: {
+                    destination: 'docs/jsdocs',
+                    private: true,
+                    configure: 'jsdocconf.json'
+                }
+            }
         }
     });
   
   grunt.loadNpmTasks('grunt-execute');
+  grunt.loadNpmTasks('grunt-jsdoc');
 
   grunt.registerTask('default', 'My "default" task description.', ['execute:jscc_cql_grammar']);
 

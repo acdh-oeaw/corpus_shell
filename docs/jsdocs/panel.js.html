@@ -1,4 +1,32 @@
-/* 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: panel.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: panel.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* 
  * The MIT License
  *
  * Copyright 2016 OEAW/ACDH.
@@ -97,7 +125,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
     {
       var match;
       var pl     = /\+/g;  //  Regex for replacing addition symbol with a space
-      var search = /([^&=]+)=?([^&]*)/g;
+      var search = /([^&amp;=]+)=?([^&amp;]*)/g;
       var decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
 
       var query  = "";
@@ -185,7 +213,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
    * @desc The index in {@link module:corpus_shell~SearchConfig} for the config to use in search operations.
    */
   this.Config = config;
-  if (panelController !== undefined && config === undefined && this.Type !== "search") {
+  if (panelController !== undefined &amp;&amp; config === undefined &amp;&amp; this.Type !== "search") {
       this.Config = panelController.GetSearchIdx(this.UrlParams['x-context']);
   }
   /**
@@ -422,16 +450,16 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
   /**
   * @param {number} configIdx Preselected index of SearchCombo
   * @param {string} searchStr Search string to inserted in search input
-  * @desc <ol>
-  * <li>Creates a new div and styles it as needed by the ui. Its id is set to the unique panel id.</li>
-  * <li>Creates the "window title bar" using {@link module:corpus_shell~Panel#GeneratePanelTitle}</li>
-  * <li>Builds a query to be executed if some search string is given.</li>
-  * <li>Creates the ui elements for searching.<br/>
-  * -> {@link module:corpus_shell~Panel#GenerateSearchInputs} <br/>
-  * -> {@link module:corpus_shell~Panel#GenerateSearchNavigation}</li>
-  * <li>Adds a div for search results. -> {@link module:corpus_shell~Panel#GenerateSearchResultsDiv}</li>
-  * <li>Makes the panel draggable. -> {@link module:corpus_shell~Panel#InitDraggable} </li>
-  * </ol>
+  * @desc &lt;ol>
+  * &lt;li>Creates a new div and styles it as needed by the ui. Its id is set to the unique panel id.&lt;/li>
+  * &lt;li>Creates the "window title bar" using {@link module:corpus_shell~Panel#GeneratePanelTitle}&lt;/li>
+  * &lt;li>Builds a query to be executed if some search string is given.&lt;/li>
+  * &lt;li>Creates the ui elements for searching.&lt;br/>
+  * -> {@link module:corpus_shell~Panel#GenerateSearchInputs} &lt;br/>
+  * -> {@link module:corpus_shell~Panel#GenerateSearchNavigation}&lt;/li>
+  * &lt;li>Adds a div for search results. -> {@link module:corpus_shell~Panel#GenerateSearchResultsDiv}&lt;/li>
+  * &lt;li>Makes the panel draggable. -> {@link module:corpus_shell~Panel#InitDraggable} &lt;/li>
+  * &lt;/ol>
   * @summary purpose:    creates a new search panel and displays it.
   * @return    -
   */
@@ -439,7 +467,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
   {
     var query = "";
 
-    if (this.Url !== undefined && this.Url !== "")
+    if (this.Url !== undefined &amp;&amp; this.Url !== "")
     {
       var urlObj = this.GetUrlParams(this.Url);
       var xContext = urlObj['x-context'];
@@ -714,7 +742,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
           else
           {
             var height;
-            if ($.browser !== undefined && $.browser.mozilla) {
+            if ($.browser !== undefined &amp;&amp; $.browser.mozilla) {
             /* Part of a crude hack to get around missing support for overflow and
              * percentage height in table cells in firefox (only fixed px overflows
              * are used).
@@ -724,7 +752,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
             var searchResults = $(elem).find(".searchresults");
             searchResults.attr('class', searchResults.attr('class') + ' ' + snippetClasses);
             searchResults.html(responseText);
-            if ($.browser !== undefined && $.browser.mozilla) {
+            if ($.browser !== undefined &amp;&amp; $.browser.mozilla) {
                 $(elem).find(".c_s-scroll-area").height(height);
             }
             panel.InitScrollPane();
@@ -752,7 +780,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
     {
       resultPane = resultPane.data('jsp').getContentPane();
     }
-    resultPane.html('<img src="' + this.Url + '" class="facsimile-img"/>');
+    resultPane.html('&lt;img src="' + this.Url + '" class="facsimile-img"/>');
     var caller = this;
     $(".facsimile-img").load(function(){
     	caller.RefreshScrollPane();
@@ -795,22 +823,22 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
     var xcontext = this.PanelController.GetResourceName(sele);
 
         /* url +  */
-    var urlStr = params.switchURL + "?operation=searchRetrieve&query=" + sstr + "&x-context=" + xcontext +
-                 "&x-format=html&version=1.2";
+    var urlStr = params.switchURL + "?operation=searchRetrieve&amp;query=" + sstr + "&amp;x-context=" + xcontext +
+                 "&amp;x-format=html&amp;version=1.2";
     if (this.UrlParams['x-dataview'] !== undefined) {
-        urlStr += "&x-dataview=" +this.UrlParams['x-dataview'];
+        urlStr += "&amp;x-dataview=" +this.UrlParams['x-dataview'];
     } else {
-        urlStr += "&x-dataview=kwic,title"
+        urlStr += "&amp;x-dataview=kwic,title"
     }
 
-    if (!max || max <= 0) max = this.DefaultMaxRecords;
-    if (!start || start < 1) start = this.DefaultStartRecord;
+    if (!max || max &lt;= 0) max = this.DefaultMaxRecords;
+    if (!start || start &lt; 1) start = this.DefaultStartRecord;
 
-    urlStr += '&maximumRecords=' + max + '&startRecord=' + start;
+    urlStr += '&amp;maximumRecords=' + max + '&amp;startRecord=' + start;
     
     var useQueryTypeNative = $(parElem).find(".c_s-queryType-native:checked");
     if (useQueryTypeNative.length === 1) {
-        urlStr += "&queryType=native";
+        urlStr += "&amp;queryType=native";
     }
 
     this.SetUrl(urlStr);
@@ -837,7 +865,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
              hstr = xml.responseText;
           else
              hstr = xml.statusText;
-          hstr = hstr.replace(/&amp;/g, "&");
+          hstr = hstr.replace(/&amp;amp;/g, "&amp;");
 
           var hits;
           // init or refresh scrollbars
@@ -861,8 +889,8 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
             $(resultPane).html(hstr);
             hits = parseInt($(resultPane).find(".result-header").attr("data-numberOfRecords"), 10);
             if ($.browser.mozilla) {
-                height = (oldHits <= 1) && (hits > 1) ? height - navigationHeight : height;
-                height = (hits <= 1) && (oldHits > 1) ? height + navigationHeight : height;
+                height = (oldHits &lt;= 1) &amp;&amp; (hits > 1) ? height - navigationHeight : height;
+                height = (hits &lt;= 1) &amp;&amp; (oldHits > 1) ? height + navigationHeight : height;
                 $(parElem).find(".c_s-scroll-area").height(height);
             }
             PanelController.InitScrollPane(panelId);
@@ -919,7 +947,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
 
             searchstring
                     .bind("keydown", function(event) {
-                        if (event.keyCode === $.ui.keyCode.TAB &&
+                        if (event.keyCode === $.ui.keyCode.TAB &amp;&amp;
                                 $(this).data("autocomplete").menu.active) {
                             event.preventDefault();
                         }
@@ -981,7 +1009,7 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
    * @param {number} configIdx A number that denotes the preselected option.
    */
   this.ConfigureSearchContextCombo = function(searchcombo, configIdx) {
-    for (var i = 0; i < this.PanelController.SearchConfig.length; i++)
+    for (var i = 0; i &lt; this.PanelController.SearchConfig.length; i++)
     {
        var searchoption = $(document.createElement('option'));
        searchoption.prop("value", i);
@@ -1100,3 +1128,26 @@ var module = function (id, type, title, url, position, pinned, zIndex, container
     // publish
     exports.Panel = module;
 }(window, jQuery, params, PanelController, ResourceController, VirtualKeyboard, document);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-corpus_shell.html">corpus_shell</a></li></ul><h3>Classes</h3><ul><li><a href="-_anonymous_-module.QueryInput.html">QueryInput</a></li><li><a href="corpus_shell.BookReaderPanel.html">BookReaderPanel</a></li><li><a href="corpus_shell.MapPanel.html">MapPanel</a></li><li><a href="corpus_shell.PanelManager.html">PanelManager</a></li><li><a href="corpus_shell.ResourceManager.html">ResourceManager</a></li><li><a href="corpus_shell.XmlPanel.html">XmlPanel</a></li><li><a href="corupus_shell.Panel.html">Panel</a></li><li><a href="CQLConfig.html">CQLConfig</a></li></ul><h3>Events</h3><ul><li><a href="corpus_shell.PanelManager.html#event:onUpdated">onUpdated</a></li></ul><h3>Global</h3><ul><li><a href="global.html#doOnDocumentReady">doOnDocumentReady</a></li><li><a href="global.html#drawChart">drawChart</a></li><li><a href="global.html#json_encode">json_encode</a></li><li><a href="global.html#PanelController">PanelController</a></li><li><a href="global.html#ResourceController">ResourceController</a></li><li><a href="global.html#searchPanelCount">searchPanelCount</a></li><li><a href="global.html#sitesTitle">sitesTitle</a></li><li><a href="global.html#updating">updating</a></li><li><a href="global.html#userId">userId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 10 2017 13:04:47 GMT+0100 (Mitteleuropäische Zeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
