@@ -18,7 +18,6 @@
   ],
   "dependencies": {
     "jquery": "^2.2.0",
-    "openlayers": "*",
     "jquery-selection": "^1.0.1",
     "tablesorter": "jquery.tablesorter#^2.25.3",
     "jquery-history": "^1.5",
@@ -26,7 +25,8 @@
     "jquery-migrate": "^1.3.0",
     "urijs": "URIjs#^1.17.0",
     "awesome-bootstrap-checkbox": "0.3.7",
-    "bootstrap": "3.3.6"
+    "bootstrap": "3.3.6",
+    "ol2-bower": "^2.13.1"
   },
   "devDependencies": {
     "jasmine-core": "jasmine#^2.4.1"
