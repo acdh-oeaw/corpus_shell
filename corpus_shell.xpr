@@ -14,21 +14,6 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xsl/tests/input/fcs/scan2view_v1/tunisian-start-from-Mekka-Pilgramage.xml</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>scan v1</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
                                     <String>http://localhost/corpus_shell//modules/fcs-aggregator/switch.php?version=1.2&amp;operation=scan&amp;scanClause=toolsText&amp;x-context=vicav_tools_001&amp;sort=x&amp;maximumTerms=10</String>
                                 </field>
                                 <field name="scenarioIds">
