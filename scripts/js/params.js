@@ -44,7 +44,7 @@ if (userData === undefined) { var userData = "modules/userdata/"; }
  * Most probably this is set to a sane default in some (XSL) generated script tags.
  * @type {url} 
  */
-if (switchURL === undefined) { var switchURL = "https://cs.eos.arz.oeaw.ac.at/modules/fcs-aggregator/switch.php"; }
+if (switchURL === undefined) { var switchURL = "https://cs.acdh.oeaw.ac.at/modules/fcs-aggregator/switch.php"; }
 /** The url or path where the templates which are used for the UI should be loaded from.
  * Please not: if this is a relative url it may be relative to whatever URL the
  * corpus_shell is called from. Do not use relative URLs if you can't be sure
